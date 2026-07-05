@@ -15,6 +15,7 @@
         "material",
         "consumable",
         "projectile",
+        "tool",
         "recipe",
         "trash",
         "vendor_trash",
@@ -24,7 +25,7 @@
       ]
     },
     "subcategory": { "type": ["string", "null"] },
-    "type": { "type": ["string", "null"], "description": "Category-specific type, for example leather, meat, food, potion, projectile, mail, leather armor." },
+    "type": { "type": ["string", "null"], "description": "Category-specific type, for example leather, meat, food, potion, projectile, tool, mail, leather armor." },
     "quality": { "type": ["string", "null"] },
     "bindType": { "type": ["string", "null"] },
     "taxonomyPath": { "type": ["string", "null"] },
@@ -36,6 +37,18 @@
         "armor": { "type": ["integer", "null"] },
         "usableByDaddyStitchNow": { "type": ["boolean", "null"] },
         "reasonUsabilityUnknown": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "tool": {
+      "type": ["object", "null"],
+      "properties": {
+        "toolType": { "type": ["string", "null"] },
+        "requiredForProfession": { "type": ["string", "null"] },
+        "weaponSlot": { "type": ["string", "null"] },
+        "speed": { "type": ["number", "null"] },
+        "damageText": { "type": ["string", "null"] },
+        "damagePerSecond": { "type": ["number", "null"] }
       },
       "additionalProperties": true
     },
