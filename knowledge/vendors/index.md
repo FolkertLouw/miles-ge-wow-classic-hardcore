@@ -16,3 +16,7 @@ Do not invent vendor inventory or prices.
 ## Mulgore / Camp Narache
 
 - [Bronk Steelrage](bronk-steelrage.md) — Armorer and Shieldcrafter, observed around 44.24, 77.42.
+
+## Mulgore / Bloodhoof Village
+
+- [Wunna Darkmane](wunna-darkmane.md) — Trade Goods, level 10 NPC, observed at 46.15, 58.16; sold Skinning Knife for 82c.
