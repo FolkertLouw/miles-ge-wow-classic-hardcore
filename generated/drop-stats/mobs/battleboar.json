@@ -1,0 +1,41 @@
+{
+  "mobName": "Battleboar",
+  "zone": "Mulgore",
+  "source": "DaddyStitch personally verified field data",
+  "observedKillCount": 1,
+  "observations": [
+    {
+      "eventId": "ds-000008",
+      "characterLevel": 5,
+      "mobLevel": 3,
+      "coords": {
+        "x": 52.83,
+        "y": 81.58
+      },
+      "xpGained": 42,
+      "drops": [
+        "Battleboar Flank",
+        "Splintered Tusk",
+        "Ragged Leather Belt"
+      ]
+    }
+  ],
+  "drops": {
+    "Battleboar Flank": {
+      "observedDropCount": 1,
+      "observedFrequency": 1.0,
+      "itemPath": "knowledge/items/quest-items/battleboar-flank.md"
+    },
+    "Splintered Tusk": {
+      "observedDropCount": 1,
+      "observedFrequency": 1.0,
+      "itemPath": "knowledge/items/trash/splintered-tusk.md"
+    },
+    "Ragged Leather Belt": {
+      "observedDropCount": 1,
+      "observedFrequency": 1.0,
+      "itemPath": "knowledge/items/gear/leather/waist/ragged-leather-belt.md"
+    }
+  },
+  "notes": "Observed frequencies are based on DaddyStitch field data only. With one kill logged, all observed drops show 100%; this should not be interpreted as global drop rate."
+}
