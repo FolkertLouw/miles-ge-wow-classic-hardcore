@@ -28,8 +28,8 @@ Personally verified through DaddyStitch field data.
 
 | Reward | Quality | Armor Class | Slot | Armor | Item Page |
 |---|---|---|---|---:|---|
-| Painted Chain Leggings | Common | Mail | Legs | 58 | [Item record](../items/gear/painted-chain-leggings.md) |
-| Nomadic Gloves | Common | Leather | Hands | 21 | [Item record](../items/gear/nomadic-gloves.md) |
+| Painted Chain Leggings | Common | Mail | Legs | 58 | [Item record](../items/gear/mail/legs/painted-chain-leggings.md) |
+| Nomadic Gloves | Common | Leather | Hands | 21 | [Item record](../items/gear/leather/hands/nomadic-gloves.md) |
 
 Chosen reward: not yet recorded.
 
@@ -42,8 +42,8 @@ The reward choice is notable for early Hunter gearing: the leather gloves may be
 ## Data Links
 
 - Required quest item: [Chief Sharptusk Thornmantle's Head](../items/quest-items/chief-sharptusk-thornmantles-head.md)
-- Reward option: [Painted Chain Leggings](../items/gear/painted-chain-leggings.md)
-- Reward option: [Nomadic Gloves](../items/gear/nomadic-gloves.md)
+- Reward option: [Painted Chain Leggings](../items/gear/mail/legs/painted-chain-leggings.md)
+- Reward option: [Nomadic Gloves](../items/gear/leather/hands/nomadic-gloves.md)
 
 ## Open Questions
 
