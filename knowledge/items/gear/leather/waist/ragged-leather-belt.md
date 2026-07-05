@@ -7,6 +7,7 @@ armorClass: Leather
 slot: Waist
 armor: 18
 durability: 16
+vendorValueCopper: 4
 source: personally_verified
 confidence: high
 taxonomyPath: gear/leather/waist
@@ -16,7 +17,7 @@ taxonomyPath: gear/leather/waist
 
 ## Summary
 
-**Ragged Leather Belt** is a personally observed poor-quality leather waist item dropped by [Battleboar](../../../../mobs/battleboar.md).
+**Ragged Leather Belt** is a personally observed poor-quality leather waist item dropped by [Battleboar](../../../../mobs/battleboar.md) and later sold to a vendor for 4c.
 
 ## Observed Item Data
 
@@ -27,6 +28,7 @@ taxonomyPath: gear/leather/waist
 | Slot | Waist |
 | Armor | 18 |
 | Durability | 16 |
+| Vendor Value | 4c |
 
 ## Observed Drop Data
 
@@ -36,10 +38,9 @@ taxonomyPath: gear/leather/waist
 
 ## Economy
 
-- Vendor value: not yet recorded
+- Vendor value: 4 copper
 - AH value: not yet recorded
 
 ## Open Questions
 
 - Can DaddyStitch equip this now?
-- What is its vendor value?
