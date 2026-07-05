@@ -26,6 +26,8 @@
         "repair_bill",
         "quest_started",
         "quest_completed",
+        "quest_reward_options_observed",
+        "quest_reward_chosen",
         "craft_made",
         "skill_up",
         "near_death",
