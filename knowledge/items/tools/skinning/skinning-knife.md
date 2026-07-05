@@ -5,11 +5,11 @@ toolType: Skinning
 quality: Common
 weaponSlot: One-Hand
 speed: 1.6
-damageText: "205 damage"
+damageText: "2-5 damage"
 damagePerSecond: 2.2
 purchasePriceCopper: 82
 source: personally_verified
-confidence: medium
+confidence: high
 taxonomyPath: tools/skinning
 ---
 
@@ -28,7 +28,7 @@ taxonomyPath: tools/skinning
 | Tool Type | Skinning |
 | Weapon Slot | One-Hand |
 | Speed | 1.6 |
-| Damage Text | 205 damage |
+| Damage | 2-5 |
 | Damage per second | 2.2 |
 | Purchase Price | 82c |
 
@@ -42,12 +42,11 @@ taxonomyPath: tools/skinning
 - Observed coordinates: 46.15, 58.16
 - Purchase price: 82 copper
 
-## Data Quality Note
+## Notes
 
-The reported damage text was **205 damage**. This may need confirmation because it does not clearly show a damage range. The raw field event stores `damageNeedsConfirmation: true`.
+Confirmed by DaddyStitch: the weapon damage shown is **2-5**, not 205.
 
 ## Open Questions
 
-- Confirm exact damage text shown in-game.
 - Does this item need to remain in inventory for Skinning to work?
 - What is its vendor sell value?
