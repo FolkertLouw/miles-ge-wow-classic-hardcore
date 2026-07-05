@@ -6,14 +6,15 @@
   "faction": "Horde",
   "race": "Tauren",
   "class": "Hunter",
-  "level": 5,
+  "level": 10,
   "zone": "Mulgore",
-  "coords": {"x": 52.83, "y": 81.58},
+  "coords": {"x": 47.55, "y": 60.23},
   "goldCopper": null,
   "professions": [],
   "secondarySkills": [],
   "pet": null,
-  "currentGoal": "Train professions.",
-  "knownRisks": ["No pet before level 10."],
-  "openQuestions": ["Current copper balance", "Profession status"]
+  "currentGoal": "Continue Bloodhoof Village quest chain.",
+  "activeQuests": ["Sharing the Land", "Rite of Vision", "A Task Unfinished"],
+  "knownRisks": [],
+  "openQuestions": ["Current copper balance", "Profession status", "Pet status after level 10"]
 }
