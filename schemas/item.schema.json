@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/FolkertLouw/miles-ge-wow-classic-hardcore/schemas/item.schema.json",
+  "title": "Classic Hardcore Item Knowledge Record",
+  "type": "object",
+  "required": ["itemName", "category", "source"],
+  "properties": {
+    "itemName": { "type": "string" },
+    "category": {
+      "type": "string",
+      "enum": ["gear", "quest_item", "material", "consumable", "recipe", "trade_good", "vendor_trash", "container", "misc"]
+    },
+    "subcategory": { "type": ["string", "null"] },
+    "quality": { "type": ["string", "null"] },
+    "bindType": { "type": ["string", "null"] },
+    "gear": {
+      "type": ["object", "null"],
+      "properties": {
+        "armorClass": { "type": ["string", "null"] },
+        "slot": { "type": ["string", "null"] },
+        "armor": { "type": ["integer", "null"] },
+        "usableByDaddyStitchNow": { "type": ["boolean", "null"] },
+        "reasonUsabilityUnknown": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "sources": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "questRelations": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "economy": {
+      "type": ["object", "null"],
+      "properties": {
+        "vendorValueCopper": { "type": ["integer", "null"] },
+        "purchasePriceCopper": { "type": ["integer", "null"] },
+        "auctionHouseObserved": { "type": ["object", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "source": {
+      "type": "string",
+      "description": "personally_verified, external_reference, or mixed."
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low", "unknown"],
+      "default": "high"
+    }
+  },
+  "additionalProperties": true
+}
