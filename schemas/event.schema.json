@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/FolkertLouw/miles-ge-wow-classic-hardcore/schemas/event.schema.json",
+  "title": "Classic Hardcore Field Event",
+  "type": "object",
+  "required": ["eventId", "character", "eventType"],
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "description": "Stable event identifier, for example ds-000001."
+    },
+    "character": {
+      "type": "string",
+      "default": "DaddyStitch"
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "mob_kill",
+        "mob_location_observed",
+        "item_looted",
+        "item_vendored",
+        "item_bought",
+        "vendor_inventory_observed",
+        "trainer_purchase",
+        "repair_bill",
+        "quest_started",
+        "quest_completed",
+        "craft_made",
+        "skill_up",
+        "near_death",
+        "level_up",
+        "route_note",
+        "state_update"
+      ]
+    },
+    "zone": { "type": ["string", "null"] },
+    "coords": {
+      "type": ["object", "null"],
+      "properties": {
+        "x": { "type": ["number", "null"] },
+        "y": { "type": ["number", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "timestamp": {
+      "type": ["string", "null"],
+      "description": "Optional ISO timestamp. Use null when unknown."
+    },
+    "source": {
+      "type": "string",
+      "default": "personally_verified"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low", "unknown"],
+      "default": "high"
+    },
+    "notes": { "type": ["string", "null"] }
+  },
+  "additionalProperties": true
+}
