@@ -2,40 +2,52 @@
   "mobName": "Battleboar",
   "zone": "Mulgore",
   "source": "DaddyStitch personally verified field data",
-  "observedKillCount": 1,
+  "observedKillCount": 2,
   "observations": [
     {
       "eventId": "ds-000008",
       "characterLevel": 5,
       "mobLevel": 3,
-      "coords": {
-        "x": 52.83,
-        "y": 81.58
-      },
+      "coords": {"x": 52.83, "y": 81.58},
       "xpGained": 42,
-      "drops": [
-        "Battleboar Flank",
-        "Splintered Tusk",
-        "Ragged Leather Belt"
-      ]
+      "drops": ["Battleboar Flank", "Splintered Tusk", "Ragged Leather Belt"]
+    },
+    {
+      "eventId": "ds-000009",
+      "characterLevel": 5,
+      "mobLevel": 4,
+      "coords": {"x": 53.18, "y": 81.21},
+      "xpGained": 56,
+      "drops": ["Battleboar Flank", "Ruined Pelt", "Ragged Leather Pants"]
     }
   ],
   "drops": {
     "Battleboar Flank": {
-      "observedDropCount": 1,
+      "observedDropCount": 2,
       "observedFrequency": 1.0,
       "itemPath": "knowledge/items/quest-items/battleboar-flank.md"
     },
     "Splintered Tusk": {
       "observedDropCount": 1,
-      "observedFrequency": 1.0,
+      "observedFrequency": 0.5,
       "itemPath": "knowledge/items/trash/splintered-tusk.md"
     },
     "Ragged Leather Belt": {
       "observedDropCount": 1,
-      "observedFrequency": 1.0,
+      "observedFrequency": 0.5,
       "itemPath": "knowledge/items/gear/leather/waist/ragged-leather-belt.md"
+    },
+    "Ruined Pelt": {
+      "observedDropCount": 1,
+      "observedFrequency": 0.5,
+      "itemPath": "knowledge/items/trash/ruined-pelt.md"
+    },
+    "Ragged Leather Pants": {
+      "observedDropCount": 1,
+      "observedFrequency": 0.5,
+      "itemPath": null,
+      "detailsMissing": true
     }
   },
-  "notes": "Observed frequencies are based on DaddyStitch field data only. With one kill logged, all observed drops show 100%; this should not be interpreted as global drop rate."
+  "notes": "Observed frequencies are based on DaddyStitch field data only. With two kills logged, these should not be interpreted as global drop rates."
 }
