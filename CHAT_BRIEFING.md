@@ -40,7 +40,9 @@ Prioritize:
 
 - mob locations
 - mob levels
+- kill counts
 - drops
+- observed drop frequency per creature
 - skinning results
 - vendor prices
 - vendor inventories
@@ -54,6 +56,52 @@ Prioritize:
 - treasury changes
 
 Avoid creating boring session logs unless useful.
+
+## Unknown Item Rule
+
+If the user mentions an item name that does not yet exist in the repository and gives no item details, ask for more information before creating an item page.
+
+Ask for useful details such as:
+
+- quality
+- category
+- armor type or item type
+- slot
+- armor
+- damage/speed/DPS for weapons
+- durability
+- vendor value
+- purchase price
+- quest relation
+- source mob/vendor/quest
+
+Do not create vague item pages when a short follow-up would significantly enrich the item record.
+
+If the item is part of a raw event and details are missing, it may be stored in the raw event with `detailsMissing: true`, but the knowledge page should wait.
+
+## Drop Tracking Rule
+
+Keep observed drop counts per creature.
+
+When logging a mob kill, record:
+
+- mob name
+- mob level
+- character level
+- coordinates, if known
+- XP gained, if known
+- every item dropped
+- quantity of each item
+
+Update the relevant mob page and drop-stat file when practical.
+
+Suggested drop-stat path:
+
+```text
+/generated/drop-stats/mobs/<mob-slug>.json
+```
+
+Important: drop stats are DaddyStitch observed field frequencies, not global drop rates.
 
 ## Do Not Invent
 
@@ -90,6 +138,8 @@ trainer_purchase
 repair_bill
 quest_started
 quest_completed
+quest_reward_options_observed
+quest_reward_chosen
 craft_made
 skill_up
 near_death
