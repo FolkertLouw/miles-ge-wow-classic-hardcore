@@ -60,10 +60,12 @@ Sold by [Bronk Steelrage](../vendors/bronk-steelrage.md):
 - [Chief Sharptusk Thornmantle's Head](quest-items/chief-sharptusk-thornmantles-head.md)
 - [Battleboar Flank](quest-items/battleboar-flank.md)
 - [Battleboar Snout](quest-items/battleboar-snout.md)
+- [Bundle of Furs](quest-items/bundle-of-furs.md)
 
 ### Consumables
 
 - [Tough Hunk of Bread](consumables/food/tough-hunk-of-bread.md)
+- [Refreshing Spring Water](consumables/drink/refreshing-spring-water.md)
 
 ### Trash
 
