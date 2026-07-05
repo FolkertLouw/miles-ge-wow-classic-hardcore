@@ -6,15 +6,19 @@
   "faction": "Horde",
   "race": "Tauren",
   "class": "Hunter",
-  "level": 10,
+  "level": 5,
   "zone": "Mulgore",
-  "coords": {"x": 47.55, "y": 60.23},
+  "coords": {"x": 46.15, "y": 58.16},
   "goldCopper": null,
-  "professions": [],
+  "professions": [
+    {"name": "Skinning", "rank": "Apprentice"},
+    {"name": "Leatherworking", "rank": "Apprentice"}
+  ],
   "secondarySkills": [],
+  "tools": ["Skinning Knife"],
   "pet": null,
-  "currentGoal": "Continue Bloodhoof Village quest chain.",
+  "currentGoal": "Use newly trained Skinning and Leatherworking; continue Bloodhoof Village quest chain.",
   "activeQuests": ["Sharing the Land", "Rite of Vision", "A Task Unfinished"],
-  "knownRisks": [],
-  "openQuestions": ["Current copper balance", "Profession status", "Pet status after level 10"]
+  "knownRisks": ["No pet before level 10."],
+  "openQuestions": ["Current copper balance", "Confirm Skinning Knife damage text", "Pet status remains none because DaddyStitch is level 5"]
 }
