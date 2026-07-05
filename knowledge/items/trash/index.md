@@ -4,6 +4,11 @@ Trash items are items that currently appear to be mainly useful for vendoring un
 
 This category includes grey items and other low-value drops if their primary recorded use is vendor sale.
 
+## Items
+
+- [Splintered Tusk](splintered-tusk.md) — Poor, observed vendor value 6c each.
+- [Ruined Pelt](ruined-pelt.md) — Poor, observed vendor value 5c each.
+
 ## Data Rules
 
 Trash item pages should include:
@@ -14,5 +19,3 @@ Trash item pages should include:
 - whether any non-vendor use has been discovered
 
 Do not assume an item is trash only because it looks useless. Classify it as trash when the user observes it as a vendor-sale item or explicitly calls it trash.
-
-No trash items have been logged yet.
