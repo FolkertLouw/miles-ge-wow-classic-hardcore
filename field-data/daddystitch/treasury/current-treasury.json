@@ -6,32 +6,23 @@
   "estimatedAuctionValueCopper": null,
   "estimatedNetWorthCopper": null,
   "knownTreasuryEvents": [
-    {
-      "eventId": "ds-ledger-000002",
-      "type": "vendor_sale",
-      "amountCopper": 101,
-      "vendorName": "Bronk Steelrage",
-      "timestamp": "2026-07-05",
-      "itemsSoldCount": 23
-    },
-    {
-      "eventId": "ds-ledger-000003",
-      "type": "vendor_sale_partial",
-      "amountCopper": 19,
-      "timestamp": "2026-07-05",
-      "itemsSoldCountConfirmed": 13
-    }
+    {"eventId": "ds-ledger-000002", "type": "vendor_sale", "amountCopper": 101, "vendorName": "Bronk Steelrage", "timestamp": "2026-07-05", "itemsSoldCount": 23},
+    {"eventId": "ds-ledger-000003", "type": "vendor_sale_partial", "amountCopper": 19, "timestamp": "2026-07-05", "itemsSoldCountConfirmed": 13},
+    {"eventId": "ds-ledger-000004", "type": "training_purchase", "amountCopper": -10, "trainerName": "Yonn Deepcut", "timestamp": "2026-07-05"},
+    {"eventId": "ds-ledger-000005", "type": "training_purchase", "amountCopper": -10, "trainerName": "Chaw Stronghide", "timestamp": "2026-07-05"},
+    {"eventId": "ds-ledger-000006", "type": "item_purchase", "amountCopper": -82, "vendorName": "Wunna Darkmane", "timestamp": "2026-07-05"}
   ],
+  "knownNetFromLoggedTreasuryEventsCopper": 18,
   "reservedCopper": {
-    "training": null,
+    "training": 0,
     "repairs": null,
     "ammo": null,
-    "professionStartup": null
+    "professionStartup": 0
   },
   "notes": [
     "All money values are stored as copper.",
-    "Recorded sale to Bronk Steelrage for 101 copper total.",
-    "Recorded a later confirmed partial sale subtotal of 19 copper; Splintered Tusk and Ruined Pelt from that message were ambiguous and excluded.",
-    "Current gold on hand is still unknown because the balance before or after sale was not reported."
+    "Known logged income: 101 copper sale plus 19 copper confirmed partial sale.",
+    "Known logged spending: 10 copper Skinning training, 10 copper Leatherworking training, 82 copper Skinning Knife.",
+    "Known net from logged treasury events is +18 copper, but current gold on hand remains unknown because starting balance and ambiguous sale items were not fully confirmed."
   ]
 }
