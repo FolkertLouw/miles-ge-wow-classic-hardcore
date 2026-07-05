@@ -20,7 +20,22 @@ Item pages should be created when an item is personally observed as:
 
 Use for equippable armor, weapons, bags/quivers/ammo pouches, trinkets, rings, necklaces, and other equipment.
 
+Gear is split by armor/type and then by slot where useful.
+
 - [Gear Index](gear/index.md)
+
+Current pattern:
+
+```text
+gear/<armor-type>/<slot>/<item>.md
+```
+
+Examples:
+
+```text
+gear/leather/hands/nomadic-gloves.md
+gear/mail/legs/painted-chain-leggings.md
+```
 
 ### Quest Items
 
@@ -28,30 +43,48 @@ Use for items that exist primarily as quest objectives or quest turn-ins.
 
 - [Quest Items Index](quest-items/index.md)
 
-### Materials
+### Trade Items
 
-Use for leather, hides, cloth, ore, herbs, meat, thread, and other crafting/economy materials.
+Use for stackable or economy/crafting-relevant items such as leather, hides, cloth, meat, fish, herbs, ore, thread, and similar materials.
 
-- Materials index: not created yet
+- [Trade Items Index](trade-items/index.md)
+
+Current pattern:
+
+```text
+trade-items/<type>/<item>.md
+```
 
 ### Consumables
 
-Use for food, potions, bandages, scrolls, elixirs, and other consumed items.
+Use for food, drink, potions, bandages, scrolls, elixirs, and other consumed items.
 
-- Consumables index: not created yet
+- [Consumables Index](consumables/index.md)
 
-### Vendor Trash / Misc
+Current pattern:
 
-Use for items that are mainly sold to vendors unless later proven useful.
+```text
+consumables/<type>/<item>.md
+```
 
-- Vendor trash index: not created yet
+### Trash
+
+Use for items that currently appear to be mainly useful for vendoring unless later field data shows another use.
+
+- [Trash Items Index](trash/index.md)
+
+Current pattern:
+
+```text
+trash/<item>.md
+```
 
 ## Current Personally Verified Items
 
 ### Gear
 
-- [Painted Chain Leggings](gear/painted-chain-leggings.md) — quest reward option from [Break Sharptusk!](../quests/break-sharptusk.md)
-- [Nomadic Gloves](gear/nomadic-gloves.md) — quest reward option from [Break Sharptusk!](../quests/break-sharptusk.md)
+- [Painted Chain Leggings](gear/mail/legs/painted-chain-leggings.md) — quest reward option from [Break Sharptusk!](../quests/break-sharptusk.md)
+- [Nomadic Gloves](gear/leather/hands/nomadic-gloves.md) — quest reward option from [Break Sharptusk!](../quests/break-sharptusk.md)
 
 ### Quest Items
 
