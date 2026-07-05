@@ -7,10 +7,11 @@ Personally verified as accepted through DaddyStitch field data.
 ## Quest Start
 
 - Start NPC: **Baine Bloodhoof**
+- Start NPC level: **10**
 - Zone: **Mulgore**
 - Area: **Bloodhoof Village**
 - Observed coordinates: **47.55, 60.23**
-- Character level when accepted: **10**
+- DaddyStitch level when accepted: **5**
 
 ## Objectives
 
@@ -44,4 +45,4 @@ These are quest objectives only. Do not create creature pages until DaddyStitch 
 - Where are the Palemane targets located?
 - What levels are they?
 - What do they drop?
-- Are they dangerous for a level 10 Tauren Hunter?
+- Are they dangerous for a level 5 Tauren Hunter?
