@@ -35,6 +35,7 @@ Examples:
 ```text
 gear/leather/hands/nomadic-gloves.md
 gear/mail/legs/painted-chain-leggings.md
+gear/shield/off-hand/dented-buckler.md
 ```
 
 ### Quest Items
@@ -81,10 +82,23 @@ trash/<item>.md
 
 ## Current Personally Verified Items
 
-### Gear
+### Gear — Quest Rewards
 
 - [Painted Chain Leggings](gear/mail/legs/painted-chain-leggings.md) — quest reward option from [Break Sharptusk!](../quests/break-sharptusk.md)
 - [Nomadic Gloves](gear/leather/hands/nomadic-gloves.md) — quest reward option from [Break Sharptusk!](../quests/break-sharptusk.md)
+
+### Gear — Vendor Items
+
+Sold by [Bronk Steelrage](../vendors/bronk-steelrage.md):
+
+- [Rusted Chain Vest](gear/mail/chest/rusted-chain-vest.md) — Mail, Chest, 67 armor, 77c
+- [Rusted Chain Belt](gear/mail/waist/rusted-chain-belt.md) — Mail, Waist, 38 armor, 38c
+- [Rusted Chain Leggings](gear/mail/legs/rusted-chain-leggings.md) — Mail, Legs, 58 armor, 77c
+- [Rusted Chain Boots](gear/mail/feet/rusted-chain-boots.md) — Mail, Feet, 46 armor, 59c
+- [Rusted Chain Bracers](gear/mail/wrist/rusted-chain-bracers.md) — Mail, Wrist, 29 armor, 38c
+- [Rusted Chain Gloves](gear/mail/hands/rusted-chain-gloves.md) — Mail, Hands, 42 armor, 38c
+- [Dented Buckler](gear/shield/off-hand/dented-buckler.md) — Shield, Off-Hand, 29 armor, 1 block, 34c
+- [Large Wooden Shield](gear/shield/off-hand/large-wooden-shield.md) — Shield, Off-Hand, 55 armor, 1 block, 82c
 
 ### Quest Items
 
