@@ -16,93 +16,52 @@ Item pages should be created when an item is personally observed as:
 
 ## Categories
 
-### Gear
-
-Use for equippable armor, weapons, bags/quivers/ammo pouches, trinkets, rings, necklaces, and other equipment.
-
-Gear is split by armor/type and then by slot where useful.
-
 - [Gear Index](gear/index.md)
-
-Current pattern:
-
-```text
-gear/<armor-type>/<slot>/<item>.md
-```
-
-Examples:
-
-```text
-gear/leather/hands/nomadic-gloves.md
-gear/mail/legs/painted-chain-leggings.md
-gear/shield/off-hand/dented-buckler.md
-```
-
-### Quest Items
-
-Use for items that exist primarily as quest objectives or quest turn-ins.
-
 - [Quest Items Index](quest-items/index.md)
-
-### Trade Items
-
-Use for stackable or economy/crafting-relevant items such as leather, hides, cloth, meat, fish, herbs, ore, thread, and similar materials.
-
 - [Trade Items Index](trade-items/index.md)
-
-Current pattern:
-
-```text
-trade-items/<type>/<item>.md
-```
-
-### Consumables
-
-Use for food, drink, potions, bandages, scrolls, elixirs, and other consumed items.
-
 - [Consumables Index](consumables/index.md)
-
-Current pattern:
-
-```text
-consumables/<type>/<item>.md
-```
-
-### Trash
-
-Use for items that currently appear to be mainly useful for vendoring unless later field data shows another use.
-
 - [Trash Items Index](trash/index.md)
-
-Current pattern:
-
-```text
-trash/<item>.md
-```
 
 ## Current Personally Verified Items
 
 ### Gear — Quest Rewards
 
-- [Painted Chain Leggings](gear/mail/legs/painted-chain-leggings.md) — quest reward option from [Break Sharptusk!](../quests/break-sharptusk.md)
-- [Nomadic Gloves](gear/leather/hands/nomadic-gloves.md) — quest reward option from [Break Sharptusk!](../quests/break-sharptusk.md)
+- [Painted Chain Leggings](gear/mail/legs/painted-chain-leggings.md)
+- [Nomadic Gloves](gear/leather/hands/nomadic-gloves.md)
 
 ### Gear — Vendor Items
 
 Sold by [Bronk Steelrage](../vendors/bronk-steelrage.md):
 
-- [Rusted Chain Vest](gear/mail/chest/rusted-chain-vest.md) — Mail, Chest, 67 armor, 77c
-- [Rusted Chain Belt](gear/mail/waist/rusted-chain-belt.md) — Mail, Waist, 38 armor, 38c
-- [Rusted Chain Leggings](gear/mail/legs/rusted-chain-leggings.md) — Mail, Legs, 58 armor, 77c
-- [Rusted Chain Boots](gear/mail/feet/rusted-chain-boots.md) — Mail, Feet, 46 armor, 59c
-- [Rusted Chain Bracers](gear/mail/wrist/rusted-chain-bracers.md) — Mail, Wrist, 29 armor, 38c
-- [Rusted Chain Gloves](gear/mail/hands/rusted-chain-gloves.md) — Mail, Hands, 42 armor, 38c
-- [Dented Buckler](gear/shield/off-hand/dented-buckler.md) — Shield, Off-Hand, 29 armor, 1 block, 34c
-- [Large Wooden Shield](gear/shield/off-hand/large-wooden-shield.md) — Shield, Off-Hand, 55 armor, 1 block, 82c
+- [Rusted Chain Vest](gear/mail/chest/rusted-chain-vest.md)
+- [Rusted Chain Belt](gear/mail/waist/rusted-chain-belt.md)
+- [Rusted Chain Leggings](gear/mail/legs/rusted-chain-leggings.md)
+- [Rusted Chain Boots](gear/mail/feet/rusted-chain-boots.md)
+- [Rusted Chain Bracers](gear/mail/wrist/rusted-chain-bracers.md)
+- [Rusted Chain Gloves](gear/mail/hands/rusted-chain-gloves.md)
+- [Dented Buckler](gear/shield/off-hand/dented-buckler.md)
+- [Large Wooden Shield](gear/shield/off-hand/large-wooden-shield.md)
+
+### Gear — Observed Drops / Vendor Sales
+
+- [Ragged Leather Gloves](gear/leather/hands/ragged-leather-gloves.md)
+- [Ragged Leather Belt](gear/leather/waist/ragged-leather-belt.md)
+- [Frayed Belt](gear/cloth/waist/frayed-belt.md)
+- [Frayed Gloves](gear/cloth/hands/frayed-gloves.md)
+- [Frayed Pants](gear/cloth/legs/frayed-pants.md)
+- [Frayed Robe](gear/cloth/chest/frayed-robe.md)
+- [Bent Large Shield](gear/shield/off-hand/bent-large-shield.md)
+- [Dull Blade](gear/weapons/sword/main-hand/dull-blade.md)
 
 ### Quest Items
 
-- [Chief Sharptusk Thornmantle's Head](quest-items/chief-sharptusk-thornmantles-head.md) — required item for [Break Sharptusk!](../quests/break-sharptusk.md)
+- [Chief Sharptusk Thornmantle's Head](quest-items/chief-sharptusk-thornmantles-head.md)
+- [Battleboar Flank](quest-items/battleboar-flank.md)
+
+### Trash
+
+- [Splintered Tusk](trash/splintered-tusk.md)
+- [Ruined Pelt](trash/ruined-pelt.md)
 
 ## Data Rules
 
