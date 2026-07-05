@@ -8,4 +8,4 @@ Personally observed leather gear.
 
 ## Items
 
-- [Nomadic Gloves](hands/nomadic-gloves.md) — Hands, 21 armor, Common, quest reward option from [Break Sharptusk!](../../quests/break-sharptusk.md)
+- [Nomadic Gloves](hands/nomadic-gloves.md) — Hands, 21 armor, Common, quest reward option from [Break Sharptusk!](../../../quests/break-sharptusk.md)
