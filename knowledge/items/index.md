@@ -28,6 +28,7 @@ Item pages should be created when an item is personally observed as:
 
 - [Painted Chain Leggings](gear/mail/legs/painted-chain-leggings.md)
 - [Nomadic Gloves](gear/leather/hands/nomadic-gloves.md)
+- [Nomadic Vest](gear/leather/chest/nomadic-vest.md)
 
 ### Gear — Vendor Items
 
@@ -46,6 +47,7 @@ Sold by [Bronk Steelrage](../vendors/bronk-steelrage.md):
 
 - [Ragged Leather Gloves](gear/leather/hands/ragged-leather-gloves.md)
 - [Ragged Leather Belt](gear/leather/waist/ragged-leather-belt.md)
+- Ragged Leather Pants — details missing; raw drop logged from Battleboar.
 - [Frayed Belt](gear/cloth/waist/frayed-belt.md)
 - [Frayed Gloves](gear/cloth/hands/frayed-gloves.md)
 - [Frayed Pants](gear/cloth/legs/frayed-pants.md)
@@ -57,6 +59,11 @@ Sold by [Bronk Steelrage](../vendors/bronk-steelrage.md):
 
 - [Chief Sharptusk Thornmantle's Head](quest-items/chief-sharptusk-thornmantles-head.md)
 - [Battleboar Flank](quest-items/battleboar-flank.md)
+- [Battleboar Snout](quest-items/battleboar-snout.md)
+
+### Consumables
+
+- [Tough Hunk of Bread](consumables/food/tough-hunk-of-bread.md)
 
 ### Trash
 
