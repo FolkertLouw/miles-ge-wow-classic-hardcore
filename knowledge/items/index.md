@@ -20,6 +20,7 @@ Item pages should be created when an item is personally observed as:
 - [Quest Items Index](quest-items/index.md)
 - [Trade Items Index](trade-items/index.md)
 - [Consumables Index](consumables/index.md)
+- [Projectiles Index](projectiles/index.md)
 - [Trash Items Index](trash/index.md)
 
 ## Current Personally Verified Items
@@ -61,11 +62,16 @@ Sold by [Bronk Steelrage](../vendors/bronk-steelrage.md):
 - [Battleboar Flank](quest-items/battleboar-flank.md)
 - [Battleboar Snout](quest-items/battleboar-snout.md)
 - [Bundle of Furs](quest-items/bundle-of-furs.md)
+- [Totem of Hawkwind](quest-items/totem-of-hawkwind.md)
 
 ### Consumables
 
 - [Tough Hunk of Bread](consumables/food/tough-hunk-of-bread.md)
 - [Refreshing Spring Water](consumables/drink/refreshing-spring-water.md)
+
+### Projectiles
+
+- [Flash Pellet](projectiles/bullets/flash-pellet.md)
 
 ### Trash
 
