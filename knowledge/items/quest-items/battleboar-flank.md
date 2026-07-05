@@ -20,6 +20,7 @@ confidence: high
 | Quality | Common |
 | Category | Quest Item |
 | Related Quest | [The Battleboars](../../quests/the-battleboars.md) |
+| Required Quantity | 8 |
 | Observed Source | [Battleboar](../../mobs/battleboar.md) |
 
 ## Observed Drop Data
@@ -27,12 +28,16 @@ confidence: high
 | Source Mob | Mob Level | Coordinates | Character Level | Observed Drops | Observed Kills |
 |---|---:|---|---:|---:|---:|
 | [Battleboar](../../mobs/battleboar.md) | 3 | 52.83, 81.58 | 5 | 1 | 1 |
+| [Battleboar](../../mobs/battleboar.md) | 4 | 53.18, 81.21 | 5 | 1 | 1 |
 
-## Notes
+## Drop Summary
 
-Observed as a drop from one level 3 Battleboar kill. This is DaddyStitch field data only and should not be interpreted as a global drop rate.
+- Observed drops: 2
+- Observed Battleboar kills: 2
+- Observed field frequency: 100%
+
+This is DaddyStitch field data only and should not be interpreted as a global drop rate.
 
 ## Open Questions
 
-- How many Battleboar Flanks are required for The Battleboars?
 - Is the item consumed on quest turn-in?
