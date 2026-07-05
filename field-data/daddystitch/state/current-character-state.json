@@ -6,23 +6,14 @@
   "faction": "Horde",
   "race": "Tauren",
   "class": "Hunter",
-  "level": 4,
+  "level": 5,
   "zone": "Mulgore",
-  "coords": null,
-  "hearthstoneLocation": null,
+  "coords": {"x": 52.83, "y": 81.58},
   "goldCopper": null,
   "professions": [],
   "secondarySkills": [],
   "pet": null,
-  "currentGoal": "Reach level 5, get to Bloodhoof Village, train Skinning and Leatherworking, and buy a Skinning Knife.",
-  "knownRisks": [
-    "No pet before level 10.",
-    "Avoid caves and multi-pulls unless there is a strong reason.",
-    "Gold is scarce early, so every copper matters."
-  ],
-  "openQuestions": [
-    "Confirm whether DaddyStitch is Self-Found or normal Hardcore.",
-    "Record current copper/gold balance.",
-    "Record exact current location/coordinates if useful."
-  ]
+  "currentGoal": "Train professions.",
+  "knownRisks": ["No pet before level 10."],
+  "openQuestions": ["Current copper balance", "Profession status"]
 }
