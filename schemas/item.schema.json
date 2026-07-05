@@ -8,11 +8,25 @@
     "itemName": { "type": "string" },
     "category": {
       "type": "string",
-      "enum": ["gear", "quest_item", "material", "consumable", "recipe", "trade_good", "vendor_trash", "container", "misc"]
+      "enum": [
+        "gear",
+        "quest_item",
+        "trade_item",
+        "material",
+        "consumable",
+        "recipe",
+        "trash",
+        "vendor_trash",
+        "trade_good",
+        "container",
+        "misc"
+      ]
     },
     "subcategory": { "type": ["string", "null"] },
+    "type": { "type": ["string", "null"], "description": "Category-specific type, for example leather, meat, food, potion, mail, leather armor." },
     "quality": { "type": ["string", "null"] },
     "bindType": { "type": ["string", "null"] },
+    "taxonomyPath": { "type": ["string", "null"] },
     "gear": {
       "type": ["object", "null"],
       "properties": {
