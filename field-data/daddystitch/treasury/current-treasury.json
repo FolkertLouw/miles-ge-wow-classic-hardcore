@@ -1,0 +1,19 @@
+{
+  "character": "DaddyStitch",
+  "goldOnHandCopper": null,
+  "bankCopper": null,
+  "estimatedInventoryValueCopper": null,
+  "estimatedAuctionValueCopper": null,
+  "estimatedNetWorthCopper": null,
+  "reservedCopper": {
+    "training": null,
+    "repairs": null,
+    "ammo": null,
+    "professionStartup": null
+  },
+  "notes": [
+    "All money values are stored as copper.",
+    "Early profession startup goal includes Skinning training, Leatherworking training, and a Skinning Knife.",
+    "Exact current gold is unknown and should be recorded by the user."
+  ]
+}
