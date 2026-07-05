@@ -20,6 +20,19 @@ Current data is early and should expand only from reported observations.
 - The NPC was reported as patrolling around this area.
 - Used as the quest completion NPC for **Break Sharptusk!**.
 
+### Bronk Steelrage
+
+- Observed around **44.24, 77.42** in Mulgore/Camp Narache.
+- Vendor type: **Armorer and Shieldcrafter**.
+- Vendor page: [Bronk Steelrage](../vendors/bronk-steelrage.md).
+- Observed inventory includes Rusted Chain mail armor pieces and two shields.
+
+## Personally Verified Vendors
+
+| Vendor | Type | Area | Coordinates |
+|---|---|---|---|
+| [Bronk Steelrage](../vendors/bronk-steelrage.md) | Armorer and Shieldcrafter | Camp Narache | 44.24, 77.42 |
+
 ## Personally Verified Quests
 
 ### Break Sharptusk!
@@ -41,5 +54,6 @@ Current data is early and should expand only from reported observations.
 - Exact current location and route.
 - Current gold.
 - Whether this DaddyStitch character is Self-Found or normal Hardcore.
-- First personally verified mob locations, drops, vendor prices, and trainer purchases.
+- First personally verified mob locations and drops.
 - Exact location and danger notes for Chief Sharptusk Thornmantle.
+- Actual items sold to Bronk Steelrage and their vendor values.
