@@ -1,6 +1,6 @@
 # Vendors Index
 
-This index will link to personally verified vendor pages.
+This index links to personally verified vendor pages.
 
 Use vendor pages for:
 
@@ -12,3 +12,7 @@ Use vendor pages for:
 - sale/vendor values observed through DaddyStitch
 
 Do not invent vendor inventory or prices.
+
+## Mulgore / Camp Narache
+
+- [Bronk Steelrage](bronk-steelrage.md) — Armorer and Shieldcrafter, observed around 44.24, 77.42.
