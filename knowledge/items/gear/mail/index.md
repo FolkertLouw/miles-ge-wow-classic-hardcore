@@ -8,4 +8,4 @@ Personally observed mail gear.
 
 ## Items
 
-- [Painted Chain Leggings](legs/painted-chain-leggings.md) — Legs, 58 armor, Common, quest reward option from [Break Sharptusk!](../../quests/break-sharptusk.md)
+- [Painted Chain Leggings](legs/painted-chain-leggings.md) — Legs, 58 armor, Common, quest reward option from [Break Sharptusk!](../../../quests/break-sharptusk.md)
