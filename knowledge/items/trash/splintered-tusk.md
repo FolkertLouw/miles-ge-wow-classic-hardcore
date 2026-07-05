@@ -11,7 +11,7 @@ confidence: high
 
 ## Summary
 
-**Splintered Tusk** is a personally observed trash item sold to [Bronk Steelrage](../vendors/bronk-steelrage.md).
+**Splintered Tusk** is a personally observed trash item. It has been sold to [Bronk Steelrage](../vendors/bronk-steelrage.md) and later observed as a drop from [Battleboar](../mobs/battleboar.md).
 
 ## Observed Item Data
 
@@ -20,6 +20,12 @@ confidence: high
 | Quality | Poor |
 | Category | Trash |
 | Vendor Value | 6c each |
+
+## Observed Sources
+
+| Source | Source Type | Observed Count | Notes |
+|---|---|---:|---|
+| [Battleboar](../mobs/battleboar.md) | Mob drop | 1 | Dropped from one level 3 Battleboar at 52.83, 81.58. |
 
 ## Observed Vendor Sale
 
@@ -35,4 +41,4 @@ confidence: high
 
 ## Notes
 
-This item is currently classified as trash because it was observed only as a vendor-sale item.
+This item is currently classified as trash because it has only been observed as a vendor-sale item and mob drop with no non-vendor use recorded.
