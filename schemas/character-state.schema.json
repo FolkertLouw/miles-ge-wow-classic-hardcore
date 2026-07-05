@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/FolkertLouw/miles-ge-wow-classic-hardcore/schemas/character-state.schema.json",
+  "title": "Classic Hardcore Character State",
+  "type": "object",
+  "required": ["character", "game", "faction", "race", "class", "level", "zone"],
+  "properties": {
+    "character": { "type": "string" },
+    "game": { "type": "string" },
+    "mode": { "type": "string" },
+    "selfFound": { "type": ["boolean", "null"] },
+    "faction": { "type": "string" },
+    "race": { "type": "string" },
+    "class": { "type": "string" },
+    "level": { "type": "integer", "minimum": 1, "maximum": 60 },
+    "zone": { "type": ["string", "null"] },
+    "coords": {
+      "type": ["object", "null"],
+      "properties": {
+        "x": { "type": ["number", "null"] },
+        "y": { "type": ["number", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "hearthstoneLocation": { "type": ["string", "null"] },
+    "goldCopper": { "type": ["integer", "null"], "minimum": 0 },
+    "professions": { "type": "array" },
+    "secondarySkills": { "type": "array" },
+    "pet": { "type": ["object", "null"] },
+    "currentGoal": { "type": ["string", "null"] },
+    "knownRisks": { "type": "array", "items": { "type": "string" } },
+    "openQuestions": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}
