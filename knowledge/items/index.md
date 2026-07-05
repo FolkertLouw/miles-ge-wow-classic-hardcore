@@ -13,6 +13,7 @@ Item pages should be created when an item is personally observed as:
 - a crafting material
 - a meaningful gear upgrade
 - an AH sale/purchase item
+- a profession tool
 
 ## Categories
 
@@ -21,6 +22,7 @@ Item pages should be created when an item is personally observed as:
 - [Trade Items Index](trade-items/index.md)
 - [Consumables Index](consumables/index.md)
 - [Projectiles Index](projectiles/index.md)
+- [Tools Index](tools/index.md)
 - [Trash Items Index](trash/index.md)
 
 ## Current Personally Verified Items
@@ -72,6 +74,10 @@ Sold by [Bronk Steelrage](../vendors/bronk-steelrage.md):
 ### Projectiles
 
 - [Flash Pellet](projectiles/bullets/flash-pellet.md)
+
+### Tools
+
+- [Skinning Knife](tools/skinning/skinning-knife.md)
 
 ### Trash
 
