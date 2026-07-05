@@ -5,6 +5,7 @@ Items personally observed as quest objectives or quest turn-in requirements.
 ## Mulgore
 
 - [Chief Sharptusk Thornmantle's Head](chief-sharptusk-thornmantles-head.md) — required for [Break Sharptusk!](../../quests/break-sharptusk.md), dropped by Chief Sharptusk Thornmantle.
+- [Battleboar Flank](battleboar-flank.md) — quest item for [The Battleboars](../../quests/the-battleboars.md), dropped by [Battleboar](../../mobs/battleboar.md).
 
 ## Data Rules
 
