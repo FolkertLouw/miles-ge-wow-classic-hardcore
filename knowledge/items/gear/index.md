@@ -7,15 +7,6 @@ Gear is categorized by broad gear or armor type, then by slot where useful.
 ## Mail
 
 - [Mail Gear Index](mail/index.md)
-- [Mail Chest](mail/chest/index.md)
-- [Mail Waist](mail/waist/index.md)
-- [Mail Legs](mail/legs/index.md)
-- [Mail Feet](mail/feet/index.md)
-- [Mail Wrist](mail/wrist/index.md)
-- [Mail Hands](mail/hands/index.md)
-
-Observed mail items:
-
 - [Painted Chain Leggings](mail/legs/painted-chain-leggings.md)
 - [Rusted Chain Vest](mail/chest/rusted-chain-vest.md)
 - [Rusted Chain Belt](mail/waist/rusted-chain-belt.md)
@@ -27,31 +18,33 @@ Observed mail items:
 ## Leather
 
 - [Leather Gear Index](leather/index.md)
-- [Leather Hands](leather/hands/index.md)
-
-Observed leather items:
-
 - [Nomadic Gloves](leather/hands/nomadic-gloves.md)
+- [Ragged Leather Gloves](leather/hands/ragged-leather-gloves.md)
+- [Ragged Leather Belt](leather/waist/ragged-leather-belt.md)
+
+## Cloth
+
+- [Cloth Gear Index](cloth/index.md)
+- [Frayed Robe](cloth/chest/frayed-robe.md)
+- [Frayed Belt](cloth/waist/frayed-belt.md)
+- [Frayed Gloves](cloth/hands/frayed-gloves.md)
+- [Frayed Pants](cloth/legs/frayed-pants.md)
+
+## Back Slot
+
+- [Back Slot Gear Index](back/index.md)
 
 ## Shields
 
 - [Shield Gear Index](shield/index.md)
-- [Shield Off-Hand](shield/off-hand/index.md)
-
-Observed shield items:
-
 - [Dented Buckler](shield/off-hand/dented-buckler.md)
 - [Large Wooden Shield](shield/off-hand/large-wooden-shield.md)
+- [Bent Large Shield](shield/off-hand/bent-large-shield.md)
 
 ## Weapons
 
-No personally verified weapon records yet.
-
-Suggested future pattern:
-
-```text
-gear/weapons/<weapon-type>/<item>.md
-```
+- [Weapons Index](weapons/index.md)
+- [Dull Blade](weapons/sword/main-hand/dull-blade.md)
 
 ## Bags / Quivers / Ammo Pouches
 
