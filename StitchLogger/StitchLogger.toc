@@ -1,0 +1,8 @@
+## Interface: 11507
+## Title: StitchLogger
+## Notes: Field-data logger for WoW Classic Hardcore sessions.
+## Author: Folkert Louwsma / MILES GE
+## Version: 0.1.0
+## SavedVariables: StitchLoggerDB
+
+Core.lua
