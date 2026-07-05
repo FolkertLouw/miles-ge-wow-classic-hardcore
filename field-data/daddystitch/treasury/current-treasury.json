@@ -13,6 +13,13 @@
       "vendorName": "Bronk Steelrage",
       "timestamp": "2026-07-05",
       "itemsSoldCount": 23
+    },
+    {
+      "eventId": "ds-ledger-000003",
+      "type": "vendor_sale_partial",
+      "amountCopper": 19,
+      "timestamp": "2026-07-05",
+      "itemsSoldCountConfirmed": 13
     }
   ],
   "reservedCopper": {
@@ -24,6 +31,7 @@
   "notes": [
     "All money values are stored as copper.",
     "Recorded sale to Bronk Steelrage for 101 copper total.",
+    "Recorded a later confirmed partial sale subtotal of 19 copper; Splintered Tusk and Ruined Pelt from that message were ambiguous and excluded.",
     "Current gold on hand is still unknown because the balance before or after sale was not reported."
   ]
 }
