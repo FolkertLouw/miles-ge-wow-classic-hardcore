@@ -8,6 +8,7 @@ Items personally observed as quest objectives or quest turn-in requirements.
 - [Battleboar Flank](battleboar-flank.md) — required for [The Battleboars](../../quests/the-battleboars.md), dropped by [Battleboar](../../mobs/battleboar.md), 8 required.
 - [Battleboar Snout](battleboar-snout.md) — required for [The Battleboars](../../quests/the-battleboars.md), 8 required; source not yet separately observed.
 - [Bundle of Furs](bundle-of-furs.md) — objective item for [A Task Unfinished](../../quests/a-task-unfinished.md), bring to Innkeeper Kauth in Bloodhoof Village.
+- [Totem of Hawkwind](totem-of-hawkwind.md) — required for [Rites of the Earthmother](../../quests/rites-of-the-earthmother.md), 1 required.
 
 ## Data Rules
 
