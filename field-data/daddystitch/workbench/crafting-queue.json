@@ -3,14 +3,18 @@
   "craftingQueue": [
     {
       "goalId": "ds-craft-goal-001",
-      "status": "planned",
-      "description": "Train Skinning and Leatherworking, then begin recording known recipes and material requirements.",
+      "status": "completed",
+      "description": "Train Skinning and Leatherworking and buy a Skinning Knife.",
+      "completedEvents": ["ds-000016", "ds-000017", "ds-000018"]
+    },
+    {
+      "goalId": "ds-craft-goal-002",
+      "status": "active",
+      "description": "Record known Leatherworking recipes and first skinned materials after training.",
       "missing": [
-        "Reach level 5",
-        "Reach Bloodhoof Village",
-        "Train Skinning",
-        "Train Leatherworking",
-        "Buy Skinning Knife"
+        "Known Leatherworking recipe list",
+        "First skinning result",
+        "Current material inventory"
       ]
     }
   ]
