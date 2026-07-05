@@ -1,0 +1,9 @@
+{
+  "character": "DaddyStitch",
+  "profession": "Leatherworking",
+  "knownRecipes": [],
+  "notes": [
+    "Recipes should only be added when personally learned or explicitly recorded.",
+    "Do not prefill recipe data from external sources unless clearly marked as external reference."
+  ]
+}
