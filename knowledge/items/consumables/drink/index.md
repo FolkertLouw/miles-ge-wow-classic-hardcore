@@ -2,4 +2,6 @@
 
 Personally observed drink consumables.
 
-No drink consumables have been logged yet.
+## Items
+
+- [Refreshing Spring Water](refreshing-spring-water.md) — reward option from [A Task Unfinished](../../../quests/a-task-unfinished.md), quantity 5.
