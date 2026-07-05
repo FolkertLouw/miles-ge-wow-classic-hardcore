@@ -1,0 +1,9 @@
+{
+  "character": "DaddyStitch",
+  "craftOrders": [],
+  "notes": [
+    "Classic Hardcore has no built-in modern crafting-order system.",
+    "This file is for manual/player-created craft requests if DaddyStitch plays normal Hardcore and can trade/mail/AH.",
+    "If the character is Self-Found, treat this as a personal crafting goals board instead."
+  ]
+}
