@@ -1,0 +1,17 @@
+{
+  "character": "DaddyStitch",
+  "craftingQueue": [
+    {
+      "goalId": "ds-craft-goal-001",
+      "status": "planned",
+      "description": "Train Skinning and Leatherworking, then begin recording known recipes and material requirements.",
+      "missing": [
+        "Reach level 5",
+        "Reach Bloodhoof Village",
+        "Train Skinning",
+        "Train Leatherworking",
+        "Buy Skinning Knife"
+      ]
+    }
+  ]
+}
