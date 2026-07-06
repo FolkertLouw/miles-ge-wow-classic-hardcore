@@ -1,0 +1,46 @@
+{
+  "mobName": "Prairie Wolf",
+  "source": "DaddyStitch field observations",
+  "lastUpdated": "2026-07-06",
+  "observedSkinningAttemptCount": 1,
+  "observedSuccessfulSkinningCount": 1,
+  "observedLevels": [6],
+  "skinningSkillRangeObserved": {
+    "before": 1,
+    "after": 2,
+    "maxSkill": 75
+  },
+  "requiredSkinningSkillObserved": 1,
+  "skillUpsObserved": 1,
+  "observations": [
+    {
+      "sourceEventIds": ["sl-000014", "sl-000016", "sl-000019", "sl-000020"],
+      "sourceSessionId": "2026-07-06-001",
+      "mobLevel": 6,
+      "zone": "Mulgore",
+      "coords": {"mapID": 1412, "x": 50.03, "y": 63.88},
+      "skinningSkillBefore": 1,
+      "skinningSkillAfter": 2,
+      "requiredSkinningSkill": 1,
+      "canSkin": true,
+      "skillUp": true,
+      "skinningLoot": ["Ruined Leather Scraps"],
+      "confidence": "medium"
+    }
+  ],
+  "skinningDrops": [
+    {
+      "itemName": "Ruined Leather Scraps",
+      "itemId": 2934,
+      "observedCount": 1,
+      "successfulSkinsObserved": 1,
+      "fieldFrequency": 1.0,
+      "confidence": "medium",
+      "notes": "Loot message occurred immediately after the skinning flow. The addon currently logs skinning_completed before the loot message, so the importer associated this by timestamp/context."
+    }
+  ],
+  "notes": [
+    "These are DaddyStitch field frequencies, not global skinning rates.",
+    "Patch StitchLogger so the skinning loot is attached directly to skinning_completed for higher confidence."
+  ]
+}
