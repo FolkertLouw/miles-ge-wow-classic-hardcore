@@ -132,6 +132,86 @@ Loot chat line with item links extracted when possible.
 
 The importer should only treat loot-to-mob attribution as high confidence when the context is unambiguous.
 
+### Skinning events
+
+`Skinning.lua` adds explicit skinning events so skinning is not only inferred from generic loot messages.
+
+#### `skinning_started`
+
+Logged when the player starts casting Skinning.
+
+```lua
+{
+  eventType = "skinning_started",
+  spellName = "Skinning",
+  targetContext = {
+    source = "current_target",
+    mob = {
+      name = "Battleboar",
+      guid = "...",
+      level = 4,
+      creatureType = "Beast"
+    }
+  }
+}
+```
+
+#### `skinning_succeeded`
+
+Logged when the Skinning cast succeeds.
+
+```lua
+{
+  eventType = "skinning_succeeded",
+  spellName = "Skinning",
+  targetContext = {}
+}
+```
+
+#### `skinning_loot_received`
+
+Logged from loot chat within the skinning window.
+
+```lua
+{
+  eventType = "skinning_loot_received",
+  rawMessage = "You receive loot: [Light Leather].",
+  items = {},
+  skinnedMob = {
+    name = "Battleboar",
+    level = 4,
+    creatureType = "Beast"
+  },
+  skinningCast = {}
+}
+```
+
+#### `skinning_completed`
+
+Summarizes the skinning attempt when the loot window closes.
+
+```lua
+{
+  eventType = "skinning_completed",
+  skinnedMob = {
+    name = "Battleboar",
+    level = 4,
+    creatureType = "Beast"
+  },
+  skinningLoot = {
+    { name = "Light Leather", quantity = 1 }
+  }
+}
+```
+
+Importer behavior:
+
+```text
+Use `skinning_completed` as the primary source for skinning drop tables.
+Use `skinning_loot_received` as supporting evidence.
+Treat mob relation as high confidence only if the target/corpse context is unambiguous; otherwise mark needsReview.
+```
+
 ### `quest_accepted`
 
 ```lua
@@ -258,6 +338,7 @@ field-data/daddystitch/events/<date>-addon-import.jsonl
 field-data/daddystitch/state/current-character-state.json
 field-data/daddystitch/treasury/ledger.jsonl
 generated/drop-stats/mobs/*.json
+generated/skinning-stats/mobs/*.json
 knowledge/mobs/*.md
 knowledge/items/**/*.md
 knowledge/quests/*.md
