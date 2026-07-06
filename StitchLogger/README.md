@@ -2,7 +2,7 @@
 
 StitchLogger is a lightweight World of Warcraft Classic Hardcore addon for recording DaddyStitch field data during play.
 
-The addon does **not** try to generate polished field-guide pages in-game. It records raw evidence into WoW SavedVariables. After a session, the SavedVariables file can be imported into the repository and transformed into structured JSONL, drop stats, quest pages, item pages, vendor pages, and route notes.
+The addon does **not** try to generate polished field-guide pages in-game. It records raw evidence into WoW SavedVariables. After a session, the SavedVariables file can be imported into the repository and transformed into structured JSONL, drop stats, skinning stats, quest pages, item pages, vendor pages, and route notes.
 
 ## Install
 
@@ -16,9 +16,13 @@ The folder should contain:
 
 ```text
 StitchLogger.toc
+Tooltip.lua
+DebugUI.lua
 Core.lua
+Skinning.lua
 README.md
 IMPORT_FORMAT.md
+TOOLTIP_CAPTURE.md
 ```
 
 Then launch/reload WoW and enable `StitchLogger` in the addon list.
@@ -38,16 +42,52 @@ If WoW marks the addon as out of date, the `## Interface` value in `StitchLogger
 /stitch print off
 ```
 
+Debug window commands:
+
+```text
+/stitchdebug show
+/stitchdebug hide
+/stitchdebug toggle
+/stitchdebug clear
+```
+
+Alias:
+
+```text
+/sldebug
+```
+
 Recommended play loop:
 
 ```text
 /stitch start
+/stitchdebug show
 play normally
 /stitch note only for human context
 /stitch stop
 logout or /reload
 upload SavedVariables/StitchLogger.lua for import
 ```
+
+## Debug window
+
+`DebugUI.lua` adds a movable in-game dialog that shows a rolling live feed of events as they are written to the active session.
+
+It displays short summaries for events such as:
+
+- mob defeats
+- XP gains
+- loot messages
+- skinning starts/completions
+- skinning loot
+- item tooltips from loot
+- merchant opens/closes/purchases
+- trainer opens/purchases
+- quest panels/accepts/turn-ins
+- money changes
+- manual notes
+
+The debug window is for confidence while testing. The SavedVariables file remains the source of truth.
 
 ## What it logs
 
@@ -63,16 +103,20 @@ upload SavedVariables/StitchLogger.lua for import
 - target changes
 - combat-log defeat events credited to player/pet
 - loot chat messages
+- item tooltip lines from linked loot
 - quest accept/turn-in events
 - quest detail/progress/complete panels
+- quest reward item tooltip lines
 - merchant open/close
 - merchant inventory
+- merchant inventory tooltip lines
 - merchant purchases
 - bag diff across merchant session
 - trainer window
 - trainer services
 - trainer service purchases
 - profession/skill-line changes
+- explicit Skinning attempts, skill checks, skill changes, and skinning loot
 
 ### Manual
 
