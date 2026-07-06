@@ -1,6 +1,6 @@
 {
   "character": "DaddyStitch",
-  "goldOnHandCopper": null,
+  "goldOnHandCopper": 145,
   "bankCopper": null,
   "estimatedInventoryValueCopper": null,
   "estimatedAuctionValueCopper": null,
@@ -10,7 +10,8 @@
     {"eventId": "ds-ledger-000003", "type": "vendor_sale_partial", "amountCopper": 19, "timestamp": "2026-07-05", "itemsSoldCountConfirmed": 13},
     {"eventId": "ds-ledger-000004", "type": "training_purchase", "amountCopper": -10, "trainerName": "Yonn Deepcut", "timestamp": "2026-07-05"},
     {"eventId": "ds-ledger-000005", "type": "training_purchase", "amountCopper": -10, "trainerName": "Chaw Stronghide", "timestamp": "2026-07-05"},
-    {"eventId": "ds-ledger-000006", "type": "item_purchase", "amountCopper": -82, "vendorName": "Wunna Darkmane", "timestamp": "2026-07-05"}
+    {"eventId": "ds-ledger-000006", "type": "item_purchase", "amountCopper": -82, "vendorName": "Wunna Darkmane", "timestamp": "2026-07-05"},
+    {"eventId": "ds-ledger-000007", "type": "balance_snapshot", "amountCopper": 0, "timestamp": "2026-07-06T07:06:30Z", "balanceAfterCopper": 145, "sourceEventId": "sl-000022"}
   ],
   "knownNetFromLoggedTreasuryEventsCopper": 18,
   "reservedCopper": {
@@ -23,6 +24,6 @@
     "All money values are stored as copper.",
     "Known logged income: 101 copper sale plus 19 copper confirmed partial sale.",
     "Known logged spending: 10 copper Skinning training, 10 copper Leatherworking training, 82 copper Skinning Knife.",
-    "Known net from logged treasury events is +18 copper, but current gold on hand remains unknown because starting balance and ambiguous sale items were not fully confirmed."
+    "Current gold on hand was verified by StitchLogger player snapshot sl-000022 as 145 copper. This resolves the previous unknown current copper balance."
   ]
 }
