@@ -1,24 +1,38 @@
 {
   "character": "DaddyStitch",
+  "lastAddonCharacterName": "Daddystitch",
   "game": "World of Warcraft Classic Hardcore",
   "mode": "Official Classic Hardcore",
   "selfFound": null,
   "faction": "Horde",
   "race": "Tauren",
   "class": "Hunter",
+  "realm": "Stitches",
   "level": 5,
+  "xp": 2769,
+  "xpMax": 2800,
   "zone": "Mulgore",
-  "coords": {"x": 46.15, "y": 58.16},
-  "goldCopper": null,
+  "subZone": "Bloodhoof Village",
+  "coords": {"mapID": 1412, "x": 46.69, "y": 60.89},
+  "goldCopper": 145,
   "professions": [
-    {"name": "Skinning", "rank": "Apprentice"},
-    {"name": "Leatherworking", "rank": "Apprentice"}
+    {"name": "Skinning", "rank": "Apprentice", "skill": 2, "maxSkill": 75},
+    {"name": "Leatherworking", "rank": "Apprentice", "skill": 1, "maxSkill": 75}
   ],
   "secondarySkills": [],
   "tools": ["Skinning Knife"],
   "pet": null,
-  "currentGoal": "Use newly trained Skinning and Leatherworking; continue Bloodhoof Village quest chain.",
+  "currentGoal": "Continue Bloodhoof Village quest chain; collect leatherworking materials through verified skinning observations.",
   "activeQuests": ["Sharing the Land", "Rite of Vision", "A Task Unfinished"],
   "knownRisks": ["No pet before level 10."],
-  "openQuestions": ["Current copper balance", "Confirm Skinning Knife damage text", "Pet status remains none because DaddyStitch is level 5"]
+  "latestVerifiedSession": {
+    "source": "StitchLogger",
+    "sourceSessionId": "2026-07-06-001",
+    "timestamp": "2026-07-06T07:06:30Z",
+    "sourceEventId": "sl-000022"
+  },
+  "openQuestions": [
+    "Pet status remains none because DaddyStitch is level 5.",
+    "Patch StitchLogger skinning event ordering so skinning loot appears inside skinning_completed instead of only as a same-timestamp loot message."
+  ]
 }
