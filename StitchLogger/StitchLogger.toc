@@ -6,5 +6,6 @@
 ## SavedVariables: StitchLoggerDB
 
 Tooltip.lua
+DebugUI.lua
 Core.lua
 Skinning.lua
