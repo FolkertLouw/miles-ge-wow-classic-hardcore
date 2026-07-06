@@ -9,3 +9,4 @@ Tooltip.lua
 DebugUI.lua
 Core.lua
 Skinning.lua
+SkinningPostProcessor.lua
