@@ -11,10 +11,12 @@
       "goalId": "ds-craft-goal-002",
       "status": "active",
       "description": "Record known Leatherworking recipes and first skinned materials after training.",
+      "completedEvidence": [
+        {"type": "first_skinning_result", "sourceEventId": "sl-000020", "itemName": "Ruined Leather Scraps", "sourceMob": "Prairie Wolf"},
+        {"type": "current_material_inventory", "sourceFile": "field-data/daddystitch/workbench/material-inventory.json"}
+      ],
       "missing": [
-        "Known Leatherworking recipe list",
-        "First skinning result",
-        "Current material inventory"
+        "Known Leatherworking recipe list"
       ]
     }
   ]
