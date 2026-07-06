@@ -6,3 +6,4 @@
 ## SavedVariables: StitchLoggerDB
 
 Core.lua
+Skinning.lua
