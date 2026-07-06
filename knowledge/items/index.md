@@ -66,6 +66,10 @@ Sold by [Bronk Steelrage](../vendors/bronk-steelrage.md):
 - [Bundle of Furs](quest-items/bundle-of-furs.md)
 - [Totem of Hawkwind](quest-items/totem-of-hawkwind.md)
 
+### Trade Goods / Crafting Materials
+
+- [Ruined Leather Scraps](trade-goods/leather/ruined-leather-scraps.md)
+
 ### Consumables
 
 - [Tough Hunk of Bread](consumables/food/tough-hunk-of-bread.md)
@@ -83,6 +87,7 @@ Sold by [Bronk Steelrage](../vendors/bronk-steelrage.md):
 
 - [Splintered Tusk](trash/splintered-tusk.md)
 - [Ruined Pelt](trash/ruined-pelt.md)
+- [Rabbit's Foot](trash/rabbits-foot.md)
 
 ## Data Rules
 
