@@ -55,6 +55,8 @@ Every event should contain:
 }
 ```
 
+For skinning, `characterLevel` is context only. Skinning success and difficulty should be calculated from Skinning profession skill.
+
 ## Important event types
 
 ### `manual_note`
@@ -132,6 +134,59 @@ Loot chat line with item links extracted when possible.
 
 The importer should only treat loot-to-mob attribution as high confidence when the context is unambiguous.
 
+## Skinning skill model
+
+Skinning events must be interpreted through profession skill, not player level.
+
+The addon records:
+
+```lua
+skinningSkillBefore = {
+  profession = "Skinning",
+  known = true,
+  baseSkill = 1,
+  modifier = 0,
+  effectiveSkill = 1,
+  maxSkill = 75,
+  source = "skill_lines"
+}
+```
+
+and, where available:
+
+```lua
+skinningRequirementBefore = {
+  mobLevel = 4,
+  requiredSkill = 1,
+  canSkin = true,
+  skillDeltaToRequired = 0,
+  requirementFormula = "Classic: level <= 10 requires 1; level 11-20 requires level*10-100; level >= 21 requires level*5.",
+  difficultyColor = nil,
+  difficultyColorSource = "not_captured_yet"
+}
+```
+
+The importer should prefer these fields for generated skinning statistics:
+
+```text
+mob level
+required Skinning skill
+effective Skinning skill before
+effective Skinning skill after
+canSkin
+skillDeltaToRequired
+skinning loot
+skill-up delta, if any
+```
+
+### Skinning requirement formula
+
+```text
+mob level 1-10: required Skinning = 1
+mob level 11-20: required Skinning = mob level * 10 - 100
+mob level 21+: required Skinning = mob level * 5
+```
+
 ### Skinning events
 
 `Skinning.lua` adds explicit skinning events so skinning is not only inferred from generic loot messages.
@@ -151,8 +206,15 @@ Logged when the player starts casting Skinning.
       guid = "...",
       level = 4,
       creatureType = "Beast"
+    },
+    skinning = {
+      mobLevel = 4,
+      requiredSkill = 1,
+      canSkin = true
     }
-  }
+  },
+  skinningSkillBefore = {},
+  skinningRequirementBefore = {}
 }
 ```
 
@@ -164,7 +226,24 @@ Logged when the Skinning cast succeeds.
 {
   eventType = "skinning_succeeded",
   spellName = "Skinning",
-  targetContext = {}
+  targetContext = {},
+  skinningSkillBefore = {},
+  skinningSkillAfter = {},
+  skinningRequirementBefore = {},
+  skinningRequirementAfter = {}
+}
+```
+
+#### `skinning_skill_message`
+
+Logged when a skinning-related skill message arrives during the skinning window.
+
+```lua
+{
+  eventType = "skinning_skill_message",
+  rawMessage = "Your skill in Skinning has increased to 2.",
+  skinningSkillBefore = {},
+  skinningSkillAfter = {}
 }
 ```
 
@@ -182,13 +261,17 @@ Logged from loot chat within the skinning window.
     level = 4,
     creatureType = "Beast"
   },
+  skinningSkillBefore = {},
+  skinningSkillAfter = {},
+  skinningRequirementBefore = {},
+  skinningRequirementAfter = {},
   skinningCast = {}
 }
 ```
 
 #### `skinning_completed`
 
-Summarizes the skinning attempt when the loot window closes.
+Primary source event for generated skinning drop tables.
 
 ```lua
 {
@@ -200,6 +283,21 @@ Summarizes the skinning attempt when the loot window closes.
   },
   skinningLoot = {
     { name = "Light Leather", quantity = 1 }
+  },
+  skinningSkillBefore = {
+    baseSkill = 1,
+    effectiveSkill = 1,
+    maxSkill = 75
+  },
+  skinningSkillAfter = {
+    baseSkill = 2,
+    effectiveSkill = 2,
+    maxSkill = 75
+  },
+  skinningRequirementBefore = {
+    requiredSkill = 1,
+    canSkin = true,
+    skillDeltaToRequired = 0
   }
 }
 ```
@@ -209,7 +307,9 @@ Importer behavior:
 ```text
 Use `skinning_completed` as the primary source for skinning drop tables.
 Use `skinning_loot_received` as supporting evidence.
+Calculate skill-up as skinningSkillAfter.baseSkill - skinningSkillBefore.baseSkill when both are known.
 Treat mob relation as high confidence only if the target/corpse context is unambiguous; otherwise mark needsReview.
+Do not use characterLevel for skinning success calculations.
 ```
 
 ### `quest_accepted`
