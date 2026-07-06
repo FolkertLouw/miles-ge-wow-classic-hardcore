@@ -1,8 +1,20 @@
 {
   "character": "DaddyStitch",
-  "materials": [],
+  "materials": [
+    {
+      "itemName": "Ruined Leather Scraps",
+      "itemId": 2934,
+      "quantityKnown": 1,
+      "source": "skinning",
+      "sourceMob": "Prairie Wolf",
+      "sourceEventId": "sl-000020",
+      "sourceSessionId": "2026-07-06-001",
+      "confidence": "medium",
+      "notes": "Observed from loot message immediately after a Prairie Wolf skinning flow. StitchLogger timing issue left skinning_completed empty, so this is associated by same timestamp/context."
+    }
+  ],
   "notes": [
-    "Track leather, hides, thread, meat, cloth, and other crafting-relevant materials here when reported.",
-    "Quantities should reflect current known inventory only when the user explicitly reports them."
+    "Track leather, hides, thread, meat, cloth, and other crafting-relevant materials here when reported or imported from verified addon data.",
+    "Quantities should reflect current known inventory only when the user explicitly reports them or when addon session data shows acquisition without a later sale/use."
   ]
 }
