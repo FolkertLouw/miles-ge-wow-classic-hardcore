@@ -1,0 +1,34 @@
+{
+  "mobName": "Prairie Wolf",
+  "source": "DaddyStitch field observations",
+  "lastUpdated": "2026-07-06",
+  "observedKillCount": 1,
+  "observedLevels": [6],
+  "observations": [
+    {
+      "sourceEventId": "sl-000008",
+      "sourceSessionId": "2026-07-06-001",
+      "characterLevel": 5,
+      "mobLevel": 6,
+      "zone": "Mulgore",
+      "coords": {"mapID": 1412, "x": 50.03, "y": 63.88},
+      "xpGained": 148,
+      "normalLoot": ["Rabbit's Foot"]
+    }
+  ],
+  "normalDrops": [
+    {
+      "itemName": "Rabbit's Foot",
+      "itemId": 3300,
+      "observedCount": 1,
+      "killsObserved": 1,
+      "fieldFrequency": 1.0,
+      "confidence": "medium",
+      "notes": "Only one observed kill. Loot message was linked to the recent Prairie Wolf defeat by StitchLogger."
+    }
+  ],
+  "notes": [
+    "These are DaddyStitch field frequencies, not global drop rates.",
+    "Do not treat 1/1 as stable until more observations are recorded."
+  ]
+}
