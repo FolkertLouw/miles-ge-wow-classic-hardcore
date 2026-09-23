@@ -77,10 +77,15 @@ def main():
         if git(repo,'diff','--cached','--name-only'):
             raise RuntimeError('Staged changes exist; refusing to include unrelated work.')
         branch=git(repo,'branch','--show-current')
-        if branch!='codex/restore-stitchlogger-era-11509':
+        if branch!='main':
             raise RuntimeError('Unexpected branch; sync stopped without switching branches.')
         if git(repo,'remote','get-url','origin')!='https://github.com/FolkertLouw/miles-ge-wow-classic-hardcore.git':
             raise RuntimeError('Unexpected remote; sync stopped.')
+        if args.push:
+            if git(repo,'status','--porcelain'):
+                raise RuntimeError('Uncommitted changes exist; finish them before publishing the archive.')
+            git(repo,'fetch','origin')
+            git(repo,'merge','--ff-only','origin/main')
         # Parse a stable byte snapshot; a save changing during the read is retried next run.
         before=args.source.stat()
         raw=args.source.read_bytes()

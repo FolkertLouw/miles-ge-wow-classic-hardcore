@@ -11,7 +11,7 @@ Raw SavedVariables and the local SQLite index are not committed. Shared exports 
 
 ## Manual archiving and optional publishing
 
-The Codex heartbeat is paused at the user's request. Archiving is manually triggered by asking Codex to archive the latest session or by running the local Save-Classic-Archive.cmd launcher. WoW writes saves on `/reload` and logout. The manual launcher runs `tools/sync_archive.py` with the local source and archive paths. Public upload is currently disabled pending explicit approval; after approval, add `--push`. This imports a stable save, retains raw backups locally, exports gameplay records, commits only the two generated JSONL files, and, when `--push` is enabled, pushes the `codex/restore-stitchlogger-era-11509` branch. It never force-pushes, merges, changes branches, or commits unrelated staged work. A failed push leaves the commit local for retry and reports the failure.
+The Codex heartbeat is paused at the user's request. Archiving is manually triggered by asking Codex to archive the latest session or by running the local Save-Classic-Archive.cmd launcher. WoW writes saves on `/reload` and logout. The manual launcher runs `tools/sync_archive.py` with the local source and archive paths. The user authorized public publishing on 2026-09-23; the manual launcher includes `--push`. This imports a stable save, retains raw backups locally, exports gameplay records, commits only the two generated JSONL files, and, when `--push` is enabled, pushes the `main` branch. It fetches and fast-forwards from origin/main before importing. It never force-pushes, switches branches, or commits unrelated staged work; divergence stops the sync for review. A failed push leaves the commit local for retry and reports the failure.
 
 For another machine install Python and `pip install luadata==1.0.5`, then run:
 
@@ -19,4 +19,4 @@ For another machine install Python and `pip install luadata==1.0.5`, then run:
 python tools/sync_archive.py --source PATH_TO_StitchLogger.lua --archive LOCAL_ARCHIVE_DIRECTORY --push
 ```
 
-The local archive must be retained to preserve observations across addon resets. Clone this repository to obtain the shared history on another machine. This first sync configuration is tied to the existing archive branch and remote; review those checks before configuring a different repository.
+The local archive must be retained to preserve observations across addon resets. Clone this repository to obtain the shared history on another machine. This sync configuration is tied to main and the existing remote; review those checks before configuring a different repository.
