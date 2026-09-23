@@ -2,7 +2,7 @@
 ## Title: StitchLogger
 ## Notes: Field-data logger for WoW Classic Era and Hardcore exploration.
 ## Author: Folkert Louwsma / MILES GE
-## Version: 0.3.0
+## Version: 0.3.1
 ## SavedVariables: StitchLoggerDB
 
 Core.lua

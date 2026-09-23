@@ -17,6 +17,34 @@ class RecorderTests(unittest.TestCase):
     def check(self, code):
         runtime().execute(code)
 
+    def test_trainer_tooltip_rank_and_headers(self):
+        self.check("""
+        GetNumTrainerServices=function() return 3 end
+        GetTrainerServiceInfo=function(i)
+          if i==1 then return 'Hunter',nil,'header',1 end
+          return 'Mend Pet',nil,'available',1
+        end
+        GetTrainerServiceCost=function(i) assert(i~=1);return 1200 end
+        local create=CreateFrame
+        CreateFrame=function(kind,name,...)
+          local f=create(kind,name,...)
+          if name=='StitchLoggerTrainerTooltip' then
+            function f:SetTrainerService(i)
+              _G[name..'TextRight1']={GetText=function() if i==2 then return 'Rank 2' end end}
+              _G[name..'TextLeft1']={GetText=function() return 'Mend Pet' end}
+            end
+            function f:NumLines() return 1 end
+            function f:GetSpell() return 'Mend Pet',136 end
+          end
+          return f
+        end
+        C_Spell={GetSpellSubtext=function(id) assert(id==136);return 'Rank 1' end}
+        local rows=StitchLogger.TrainerSnapshot()
+        assert(#rows==2 and rows[1].index==2)
+        assert(rows[1].rank=='Rank 2' and rows[1].rankSource=='trainer_tooltip_title')
+        assert(rows[2].rank=='Rank 1' and rows[2].rankSource=='spell_subtext')
+        """)
+
     def test_localized_receipts_and_other_players(self):
         self.check('''
         receive(2318,4);assert(latest('item_received').item.quantity==4)

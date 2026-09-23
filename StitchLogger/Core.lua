@@ -128,7 +128,7 @@ end
 local function ensureDB()
   StitchLoggerDB = StitchLoggerDB or {}
   StitchLoggerDB.version = StitchLoggerDB.version or 1
-  StitchLoggerDB.addonVersion = "0.3.0"
+  StitchLoggerDB.addonVersion = "0.3.1"
   StitchLoggerDB.createdAt = StitchLoggerDB.createdAt or nowUtc()
   StitchLoggerDB.settings = cloneDefaults(StitchLoggerDB.settings or {}, DEFAULT_SETTINGS)
   StitchLoggerDB.sessions = StitchLoggerDB.sessions or {}
@@ -447,12 +447,48 @@ local function merchantInventorySnapshot()
   return result
 end
 
+local trainerTooltip
+local function trainerRankSnapshot(index, apiRank)
+  local details = { rank = apiRank ~= "" and apiRank or nil, rankSource = apiRank and apiRank ~= "" and "trainer_api" or nil }
+  if not trainerTooltip then trainerTooltip = CreateFrame("GameTooltip", "StitchLoggerTrainerTooltip", UIParent, "GameTooltipTemplate") end
+  local tip = trainerTooltip
+  tip:SetOwner(UIParent, "ANCHOR_NONE")
+  tip:ClearLines()
+  if tip.SetTrainerService then
+    local ok = pcall(tip.SetTrainerService, tip, index)
+    if ok then
+      details.tooltipLines = {}
+      for line = 1, tip:NumLines() do
+        local left = _G["StitchLoggerTrainerTooltipTextLeft" .. line]
+        local right = _G["StitchLoggerTrainerTooltipTextRight" .. line]
+        local l, r = left and left:GetText(), right and right:GetText()
+        details.tooltipLines[#details.tooltipLines+1] = { left = l, right = r }
+        -- Rank is the right-hand text of the spell title, never a prerequisite rank.
+        if line == 1 and r and r ~= "" and not details.rank then details.rank = r; details.rankSource = "trainer_tooltip_title" end
+      end
+      if tip.GetSpell then local _, id = tip:GetSpell(); details.spellID = id end
+    end
+  end
+  if not details.rank and details.spellID then
+    local getSubtext = C_Spell and C_Spell.GetSpellSubtext or GetSpellSubtext
+    if getSubtext then
+      local ok, subtext = pcall(getSubtext, details.spellID)
+      if ok and subtext and subtext ~= "" then details.rank = subtext; details.rankSource = "spell_subtext" end
+    end
+  end
+  details.rankStatus = details.rank and "observed" or "not_exposed"
+  tip:Hide()
+  return details
+end
+
 local function trainerServicesSnapshot()
   local result = {}
   if not GetNumTrainerServices or not GetTrainerServiceInfo then return result end
 
   for i = 1, GetNumTrainerServices() do
     local name, rank, category, expanded = GetTrainerServiceInfo(i)
+    if category ~= "header" then
+    local details = trainerRankSnapshot(i, rank)
     local cost = GetTrainerServiceCost and GetTrainerServiceCost(i) or nil
     local skillName, skillRank, hasSkill
     if GetTrainerServiceSkillReq then skillName, skillRank, hasSkill = GetTrainerServiceSkillReq(i) end
@@ -466,7 +502,11 @@ local function trainerServicesSnapshot()
     table.insert(result, {
       index = i,
       name = name,
-      rank = rank,
+      rank = details.rank,
+      rankSource = details.rankSource,
+      rankStatus = details.rankStatus,
+      spellID = details.spellID,
+      tooltipLines = details.tooltipLines,
       category = category,
       expanded = expanded,
       costCopper = cost,
@@ -475,6 +515,7 @@ local function trainerServicesSnapshot()
       requiredAbilities = abilities,
       link = GetTrainerServiceItemLink and GetTrainerServiceItemLink(i),
     })
+    end
   end
 
   return result
@@ -671,7 +712,10 @@ local function hookFunctions()
     hooksecurefunc("BuyTrainerService", function(index)
       local name, rank, category = GetTrainerServiceInfo(index)
       local cost = GetTrainerServiceCost and GetTrainerServiceCost(index) or nil
-      local cached = trainerSession and trainerSession.services and trainerSession.services[index]
+      local cached
+      for _, entry in ipairs(trainerSession and trainerSession.services or {}) do
+        if entry.index == index then cached = entry; break end
+      end
       if cached then name, rank, category, cost = cached.name, cached.rank, cached.category, cached.costCopper end
       logEvent("trainer_purchase_attempt", {
         trainer = unitSnapshot("npc") or unitSnapshot("target"),
