@@ -1,5 +1,7 @@
 # StitchLogger
 
+**Restored version 0.2.0:** see [RESTORATION.md](RESTORATION.md) for Classic Era 1.15.9 installation, recipe capture, `/stitchfind`, archive tools and verification details.
+
 StitchLogger is a lightweight World of Warcraft Classic Hardcore addon for recording DaddyStitch field data during play.
 
 The addon does **not** try to generate polished field-guide pages in-game. It records raw evidence into WoW SavedVariables. After a session, the SavedVariables file can be imported into the repository and transformed into structured JSONL, drop stats, skinning stats, quest pages, item pages, vendor pages, and route notes.

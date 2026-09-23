@@ -1,8 +1,8 @@
-## Interface: 11507
+## Interface: 11509
 ## Title: StitchLogger
-## Notes: Field-data logger for WoW Classic Hardcore sessions.
+## Notes: Field-data logger for WoW Classic Era and Hardcore exploration.
 ## Author: Folkert Louwsma / MILES GE
-## Version: 0.1.0
+## Version: 0.2.0
 ## SavedVariables: StitchLoggerDB
 
 Tooltip.lua
@@ -10,3 +10,5 @@ DebugUI.lua
 Core.lua
 Skinning.lua
 SkinningPostProcessor.lua
+
+Archive.lua

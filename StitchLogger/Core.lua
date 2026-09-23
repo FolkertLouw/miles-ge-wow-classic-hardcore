@@ -128,7 +128,7 @@ end
 local function ensureDB()
   StitchLoggerDB = StitchLoggerDB or {}
   StitchLoggerDB.version = StitchLoggerDB.version or 1
-  StitchLoggerDB.addonVersion = "0.1.0"
+  StitchLoggerDB.addonVersion = "0.2.0"
   StitchLoggerDB.createdAt = StitchLoggerDB.createdAt or nowUtc()
   StitchLoggerDB.settings = cloneDefaults(StitchLoggerDB.settings or {}, DEFAULT_SETTINGS)
   StitchLoggerDB.sessions = StitchLoggerDB.sessions or {}
@@ -165,6 +165,7 @@ end
 
 local function startSession(reason)
   local db = ensureDB()
+  db.paused = false
   local existing = currentSession()
   if existing then return existing end
 
@@ -174,6 +175,7 @@ local function startSession(reason)
     endedAt = nil,
     reason = reason or "manual_or_auto_start",
     character = playerSnapshot(),
+    client = { version = GetBuildInfo(), build = select(2, GetBuildInfo()), interface = select(4, GetBuildInfo()), projectID = WOW_PROJECT_ID, hardcore = C_GameRules and C_GameRules.IsHardcoreActive and C_GameRules.IsHardcoreActive() or false, locale = GetLocale() },
     events = {},
   }
 
@@ -185,6 +187,7 @@ end
 
 local function stopSession(reason)
   local db = ensureDB()
+  db.paused = true
   local session = currentSession()
   if not session then
     printMsg("no active session")
@@ -198,6 +201,7 @@ end
 
 local function logEvent(eventType, payload)
   local db = ensureDB()
+  if db.paused then return nil end
   local session = currentSession() or startSession("auto_event")
   payload = payload or {}
 
@@ -211,6 +215,7 @@ local function logEvent(eventType, payload)
     zone = GetZoneText and GetZoneText() or nil,
     subZone = GetSubZoneText and GetSubZoneText() or nil,
     coords = getCoords(),
+    coordinateBasis = "player_position_not_exact_mob_position",
     source = "addon",
     confidence = payload.confidence or "high",
   }
@@ -248,7 +253,7 @@ local function itemSnapshot(linkOrName, count)
     item.itemId = itemIDFromLink(linkOrName)
   end
 
-  local name, link, quality, itemLevel, minLevel, itemType, itemSubType, stackCount, equipLoc, icon, sellPrice, classID, subclassID, bindType = GetItemInfo(linkOrName)
+  local name, link, quality, itemLevel, minLevel, itemType, itemSubType, stackCount, equipLoc, icon, sellPrice, classID, subclassID, bindType = (C_Item and C_Item.GetItemInfo or GetItemInfo)(linkOrName)
   item.name = name or linkOrName
   item.link = link or item.link
   item.quality = quality
@@ -548,6 +553,7 @@ local function onCombatLog()
     mob = {
       name = destName,
       guid = destGUID,
+      npcId = tonumber((destGUID or ""):match("^Creature%-%d+%-%d+%-%d+%-%d+%-(%d+)%-")),
       level = cached and cached.level or nil,
       creatureType = cached and cached.creatureType or nil,
       classification = cached and cached.classification or nil,
@@ -560,6 +566,7 @@ local function onCombatLog()
     confidence = cached and "high" or "medium",
   })
 
+  if not event then return end
   lastDefeat = {
     eventId = event.eventId,
     mobName = destName,
@@ -660,6 +667,7 @@ local function onMerchantClosed()
 
   logEvent("merchant_closed", {
     vendor = merchantSession.vendor,
+    merchantInventory = merchantSession.inventory,
     openedAt = merchantSession.openedAt,
     moneyBeforeCopper = merchantSession.moneyBeforeCopper,
     moneyAfterCopper = after.moneyCopper,
@@ -691,6 +699,7 @@ local function onTrainerClosed()
   if not trainerSession then return end
   logEvent("trainer_closed", {
     trainer = trainerSession.trainer,
+    services = trainerSession.services,
     openedAt = trainerSession.openedAt,
     moneyBeforeCopper = trainerSession.moneyBeforeCopper,
     moneyAfterCopper = GetMoney and GetMoney() or nil,
@@ -704,9 +713,9 @@ local function hookFunctions()
 
   if BuyTrainerService then
     hooksecurefunc("BuyTrainerService", function(index)
-      local name, rank, category = GetTrainerServiceInfo and GetTrainerServiceInfo(index)
+      local name, rank, category = GetTrainerServiceInfo(index)
       local cost = GetTrainerServiceCost and GetTrainerServiceCost(index) or nil
-      logEvent("trainer_service_bought", {
+      logEvent("trainer_purchase_attempt", {
         trainer = unitSnapshot("target"),
         service = {
           index = index,
@@ -723,15 +732,15 @@ local function hookFunctions()
     hooksecurefunc("BuyMerchantItem", function(index, quantity)
       local name, texture, price, stackQuantity, numAvailable, isUsable, extendedCost = GetMerchantItemInfo(index)
       local link = GetMerchantItemLink and GetMerchantItemLink(index) or nil
-      local qty = quantity or 1
-      logEvent("merchant_item_bought", {
+      local qty = quantity or stackQuantity or 1
+      logEvent("merchant_purchase_attempt", {
         vendor = unitSnapshot("target"),
-        item = link and itemSnapshot(link, qty * (stackQuantity or 1)) or { name = name, quantity = qty * (stackQuantity or 1) },
+        item = link and itemSnapshot(link, qty) or { name = name, quantity = qty },
         index = index,
-        requestedStacks = qty,
+        requestedQuantity = qty,
         stackQuantity = stackQuantity,
         unitStackPriceCopper = price,
-        estimatedTotalPriceCopper = price and (price * qty) or nil,
+        estimatedTotalPriceCopper = price and (price * qty / (stackQuantity or 1)) or nil,
         extendedCost = extendedCost,
       })
     end)
@@ -756,11 +765,13 @@ local function onEvent(self, event, ...)
     return
   end
 
+  if ensureDB().paused then return end
+
   if event == "PLAYER_LOGIN" then
     ensureDB()
     lastXP = UnitXP("player")
     lastMoney = GetMoney and GetMoney() or nil
-    if StitchLoggerDB.settings.autoStartSession then
+    if StitchLoggerDB.settings.autoStartSession and not StitchLoggerDB.paused then
       startSession("player_login")
     end
     logEvent("player_login", { player = playerSnapshot(), professions = professionSnapshot() })
@@ -773,6 +784,7 @@ local function onEvent(self, event, ...)
     if session then
       session.endedAt = nowUtc()
       session.endReason = "player_logout"
+      StitchLoggerDB.currentSessionId = nil
     end
     return
   end
@@ -808,7 +820,10 @@ local function onEvent(self, event, ...)
   end
 
   if event == "MERCHANT_SHOW" then onMerchantShow(); return end
-  if event == "MERCHANT_UPDATE" and merchantSession then merchantSession.inventory = merchantInventorySnapshot(); return end
+  if event == "MERCHANT_UPDATE" and merchantSession then
+    merchantSession.inventory = merchantInventorySnapshot()
+    return
+  end
   if event == "MERCHANT_CLOSED" then onMerchantClosed(); return end
 
   if event == "TRAINER_SHOW" then onTrainerShow(); return end
@@ -898,7 +913,7 @@ SlashCmdList.STITCHLOGGER = function(msg)
       return
     end
     logEvent("manual_note", { text = rest, target = unitSnapshot("target") })
-    printMsg("note logged")
+    printMsg(ensureDB().paused and "paused; use /stitch start first" or "note logged")
   elseif cmd == "snapshot" then
     logEvent("manual_snapshot", {
       player = playerSnapshot(),
@@ -906,7 +921,7 @@ SlashCmdList.STITCHLOGGER = function(msg)
       professions = professionSnapshot(),
       bags = bagSnapshot(),
     })
-    printMsg("snapshot logged")
+    printMsg(ensureDB().paused and "paused; use /stitch start first" or "snapshot logged")
   elseif cmd == "status" then
     local session = currentSession()
     if session then
@@ -925,3 +940,9 @@ SlashCmdList.STITCHLOGGER = function(msg)
     slashHelp()
   end
 end
+
+-- Public recorder interface for optional capture modules.
+SL.LogEvent = logEvent
+SL.ItemSnapshot = itemSnapshot
+SL.PlayerSnapshot = playerSnapshot
+SL.UnitSnapshot = unitSnapshot

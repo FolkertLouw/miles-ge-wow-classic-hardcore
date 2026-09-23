@@ -117,7 +117,7 @@ local function basicItemSnapshot(linkOrName, count)
     item.itemId = itemIDFromLink(linkOrName)
   end
 
-  local name, link, quality, itemLevel, minLevel, itemType, itemSubType, stackCount, equipLoc, icon, sellPrice, classID, subclassID, bindType = GetItemInfo(linkOrName)
+  local name, link, quality, itemLevel, minLevel, itemType, itemSubType, stackCount, equipLoc, icon, sellPrice, classID, subclassID, bindType = (C_Item and C_Item.GetItemInfo or GetItemInfo)(linkOrName)
   item.name = name or linkOrName
   item.link = link or item.link
   item.quality = quality
@@ -289,6 +289,7 @@ frame:RegisterEvent("QUEST_COMPLETE")
 frame:RegisterEvent("QUEST_DETAIL")
 
 frame:SetScript("OnEvent", function(self, event, ...)
+  if StitchLoggerDB and StitchLoggerDB.paused then return end
   if event == "CHAT_MSG_LOOT" then
     local message = ...
     local links = extractItemLinks(message)

@@ -116,7 +116,7 @@ local function itemSnapshot(linkOrName, count)
     item.itemId = itemIDFromLink(linkOrName)
   end
 
-  local name, link, quality, itemLevel, minLevel, itemType, itemSubType, stackCount, equipLoc, icon, sellPrice, classID, subclassID, bindType = GetItemInfo(linkOrName)
+  local name, link, quality, itemLevel, minLevel, itemType, itemSubType, stackCount, equipLoc, icon, sellPrice, classID, subclassID, bindType = (C_Item and C_Item.GetItemInfo or GetItemInfo)(linkOrName)
   item.name = name or linkOrName
   item.link = link or item.link
   item.quality = quality
@@ -297,6 +297,7 @@ frame:RegisterEvent("LOOT_OPENED")
 frame:RegisterEvent("LOOT_CLOSED")
 
 frame:SetScript("OnEvent", function(self, event, ...)
+  if StitchLoggerDB and StitchLoggerDB.paused then return end
   if event == "COMBAT_LOG_EVENT_UNFILTERED" then
     if not CombatLogGetCurrentEventInfo then return end
     local timestamp, subevent, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags,
