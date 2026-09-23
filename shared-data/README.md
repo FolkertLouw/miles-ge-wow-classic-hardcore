@@ -9,9 +9,9 @@ Repeated observations are intentional historical evidence. Use observationID plu
 
 Raw SavedVariables and the local SQLite index are not committed. Shared exports omit unit GUIDs, character/account identifiers and raw chat messages. Observation IDs are hashes used for stable deduplication. Coordinates are player positions at observation time.
 
-## Automatic publishing
+## Manual archiving and optional publishing
 
-The configured Codex heartbeat checks for a changed save every 10 minutes while Codex is available. WoW writes saves on `/reload` and logout. It runs `tools/sync_archive.py` with the local source and archive paths. Public upload is currently disabled pending explicit approval; after approval, add `--push`. This imports a stable save, retains raw backups locally, exports gameplay records, commits only the two generated JSONL files, and, when `--push` is enabled, pushes the `codex/restore-stitchlogger-era-11509` branch. It never force-pushes, merges, changes branches, or commits unrelated staged work. A failed push leaves the commit local for retry and reports the failure.
+The Codex heartbeat is paused at the user's request. Archiving is manually triggered by asking Codex to archive the latest session or by running the local Save-Classic-Archive.cmd launcher. WoW writes saves on `/reload` and logout. The manual launcher runs `tools/sync_archive.py` with the local source and archive paths. Public upload is currently disabled pending explicit approval; after approval, add `--push`. This imports a stable save, retains raw backups locally, exports gameplay records, commits only the two generated JSONL files, and, when `--push` is enabled, pushes the `codex/restore-stitchlogger-era-11509` branch. It never force-pushes, merges, changes branches, or commits unrelated staged work. A failed push leaves the commit local for retry and reports the failure.
 
 For another machine install Python and `pip install luadata==1.0.5`, then run:
 
