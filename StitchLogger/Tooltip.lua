@@ -76,26 +76,9 @@ local function nextEventId()
 end
 
 local function logTooltipEvent(eventType, payload)
-  local session = currentSession()
   payload = payload or {}
-  local event = {
-    eventId = nextEventId(),
-    eventType = eventType,
-    timestamp = nowUtc(),
-    timeSeconds = time(),
-    character = UnitName("player"),
-    characterLevel = UnitLevel("player"),
-    zone = GetZoneText and GetZoneText() or nil,
-    subZone = GetSubZoneText and GetSubZoneText() or nil,
-    coords = getCoords(),
-    source = "addon",
-    module = "Tooltip.lua",
-    confidence = payload.confidence or "high",
-  }
-  payload.confidence = nil
-  for k, v in pairs(payload) do event[k] = v end
-  table.insert(session.events, event)
-  return event
+  payload.metadataOnly = true
+  return StitchLogger.LogEvent(eventType, payload)
 end
 
 local function itemIDFromLink(link)
@@ -297,7 +280,9 @@ frame:SetScript("OnEvent", function(self, event, ...)
 
     local items = {}
     for _, link in ipairs(links) do
-      table.insert(items, _G.StitchLoggerItemSnapshotWithTooltip(link, 1))
+      local item = _G.StitchLoggerItemSnapshotWithTooltip(link, 1)
+      item.quantity = nil
+      table.insert(items, item)
     end
 
     logTooltipEvent("item_tooltips_from_loot", {

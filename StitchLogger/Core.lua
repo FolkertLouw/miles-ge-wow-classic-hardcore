@@ -128,7 +128,7 @@ end
 local function ensureDB()
   StitchLoggerDB = StitchLoggerDB or {}
   StitchLoggerDB.version = StitchLoggerDB.version or 1
-  StitchLoggerDB.addonVersion = "0.2.0"
+  StitchLoggerDB.addonVersion = "0.3.0"
   StitchLoggerDB.createdAt = StitchLoggerDB.createdAt or nowUtc()
   StitchLoggerDB.settings = cloneDefaults(StitchLoggerDB.settings or {}, DEFAULT_SETTINGS)
   StitchLoggerDB.sessions = StitchLoggerDB.sessions or {}
@@ -168,6 +168,7 @@ local function startSession(reason)
   db.paused = false
   local existing = currentSession()
   if existing then return existing end
+  if SL.ResetTransient then SL.ResetTransient("start") end
 
   local session = {
     sessionId = nextSessionId(),
@@ -187,6 +188,8 @@ end
 
 local function stopSession(reason)
   local db = ensureDB()
+  if SL.FlushPending then SL.FlushPending("paused") end
+  if SL.ResetTransient then SL.ResetTransient("paused") end
   db.paused = true
   local session = currentSession()
   if not session then
@@ -203,7 +206,7 @@ local function logEvent(eventType, payload)
   local db = ensureDB()
   if db.paused then return nil end
   local session = currentSession() or startSession("auto_event")
-  payload = payload or {}
+  payload = SL.Copy and SL.Copy(payload or {}) or (payload or {})
 
   local event = {
     eventId = nextEventId(),
@@ -231,6 +234,7 @@ local function logEvent(eventType, payload)
     printMsg("logged " .. eventType .. " " .. event.eventId)
   end
 
+  if SL.Notify then SL.Notify(event) end
   return event
 end
 
@@ -450,6 +454,15 @@ local function trainerServicesSnapshot()
   for i = 1, GetNumTrainerServices() do
     local name, rank, category, expanded = GetTrainerServiceInfo(i)
     local cost = GetTrainerServiceCost and GetTrainerServiceCost(i) or nil
+    local skillName, skillRank, hasSkill
+    if GetTrainerServiceSkillReq then skillName, skillRank, hasSkill = GetTrainerServiceSkillReq(i) end
+    local abilities = {}
+    if GetTrainerServiceNumAbilityReq and GetTrainerServiceAbilityReq then
+      for j = 1, GetTrainerServiceNumAbilityReq(i) do
+        local ability, met = GetTrainerServiceAbilityReq(i, j)
+        abilities[#abilities+1] = { name = ability, met = met }
+      end
+    end
     table.insert(result, {
       index = i,
       name = name,
@@ -457,6 +470,10 @@ local function trainerServicesSnapshot()
       category = category,
       expanded = expanded,
       costCopper = cost,
+      requiredLevel = GetTrainerServiceLevelReq and GetTrainerServiceLevelReq(i),
+      requiredSkill = { name = skillName, rank = skillRank, met = hasSkill },
+      requiredAbilities = abilities,
+      link = GetTrainerServiceItemLink and GetTrainerServiceItemLink(i),
     })
   end
 
@@ -506,12 +523,13 @@ local function questRewardSnapshot()
 
   if GetRewardMoney then reward.moneyCopper = GetRewardMoney() end
   if GetRewardXP then reward.xp = GetRewardXP() end
+  reward.questID = GetQuestID and GetQuestID() or nil
+  reward.requiredMoneyCopper = GetQuestMoneyToGet and GetQuestMoneyToGet() or nil
 
   return reward
 end
 
 local lastTarget = nil
-local lastDefeat = nil
 local lastXP = nil
 local lastMoney = nil
 local merchantSession = nil
@@ -525,73 +543,11 @@ local function cacheTarget()
   end
 end
 
-local function recentDefeatContext()
-  if lastDefeat and (time() - (lastDefeat.timeSeconds or 0)) <= 20 then
-    return lastDefeat
-  end
-  return nil
-end
-
-local function onCombatLog()
-  local db = ensureDB()
-  if not db.settings.logCombatDefeats then return end
-  if not CombatLogGetCurrentEventInfo then return end
-
-  local timestamp, subevent, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags,
-        destGUID, destName, destFlags, destRaidFlags = CombatLogGetCurrentEventInfo()
-
-  if subevent ~= "PARTY_KILL" then return end
-
-  local playerGUID = UnitGUID("player")
-  local petGUID = UnitGUID("pet")
-  if sourceGUID ~= playerGUID and sourceGUID ~= petGUID then return end
-
-  local cached = nil
-  if lastTarget and lastTarget.guid == destGUID then cached = lastTarget end
-
-  local event = logEvent("mob_defeat", {
-    mob = {
-      name = destName,
-      guid = destGUID,
-      npcId = tonumber((destGUID or ""):match("^Creature%-%d+%-%d+%-%d+%-%d+%-(%d+)%-")),
-      level = cached and cached.level or nil,
-      creatureType = cached and cached.creatureType or nil,
-      classification = cached and cached.classification or nil,
-    },
-    creditedSource = {
-      guid = sourceGUID,
-      name = sourceName,
-      sourceType = sourceGUID == petGUID and "pet" or "player",
-    },
-    confidence = cached and "high" or "medium",
-  })
-
-  if not event then return end
-  lastDefeat = {
-    eventId = event.eventId,
-    mobName = destName,
-    mobGuid = destGUID,
-    mobLevel = cached and cached.level or nil,
-    timeSeconds = time(),
-    coords = event.coords,
-  }
-end
-
 local function onLootMessage(message)
   local db = ensureDB()
   if not db.settings.logLootChat then return end
-
-  local items = {}
-  for link in tostring(message):gmatch("|c%x+|Hitem:.-|h%[.-%]|h|r") do
-    table.insert(items, itemSnapshot(link, 1))
-  end
-
-  logEvent("loot_message", {
-    rawMessage = message,
-    items = items,
-    recentDefeat = recentDefeatContext(),
-    confidence = (#items > 0 and recentDefeatContext()) and "medium" or "low",
-  })
+  if SL.RecordLootMessage then SL.RecordLootMessage(message)
+  else logEvent("loot_message", {rawMessage=message, attribution="parser_unavailable", confidence="low"}) end
 end
 
 local function onMoneyChanged()
@@ -634,7 +590,7 @@ local function onXPChanged()
       xpBefore = lastXP,
       xpAfter = xp,
       xpGained = delta,
-      recentDefeat = recentDefeatContext(),
+      attribution = "unassigned_xp_change",
     })
   end
 
@@ -643,7 +599,7 @@ end
 
 local function onMerchantShow()
   local db = ensureDB()
-  local vendor = unitSnapshot("target")
+  local vendor = unitSnapshot("npc") or unitSnapshot("target")
   merchantSession = {
     openedAt = nowUtc(),
     vendor = vendor,
@@ -683,7 +639,7 @@ end
 local function onTrainerShow()
   trainerSession = {
     openedAt = nowUtc(),
-    trainer = unitSnapshot("target"),
+    trainer = unitSnapshot("npc") or unitSnapshot("target"),
     coords = getCoords(),
     moneyBeforeCopper = GetMoney and GetMoney() or nil,
     services = trainerServicesSnapshot(),
@@ -715,8 +671,10 @@ local function hookFunctions()
     hooksecurefunc("BuyTrainerService", function(index)
       local name, rank, category = GetTrainerServiceInfo(index)
       local cost = GetTrainerServiceCost and GetTrainerServiceCost(index) or nil
+      local cached = trainerSession and trainerSession.services and trainerSession.services[index]
+      if cached then name, rank, category, cost = cached.name, cached.rank, cached.category, cached.costCopper end
       logEvent("trainer_purchase_attempt", {
-        trainer = unitSnapshot("target"),
+        trainer = unitSnapshot("npc") or unitSnapshot("target"),
         service = {
           index = index,
           name = name,
@@ -779,6 +737,8 @@ local function onEvent(self, event, ...)
   end
 
   if event == "PLAYER_LOGOUT" then
+    if SL.FlushPending then SL.FlushPending("logout") end
+    if SL.ResetTransient then SL.ResetTransient("logout") end
     logEvent("player_logout", { player = playerSnapshot(), professions = professionSnapshot() })
     local session = currentSession()
     if session then
@@ -811,7 +771,7 @@ local function onEvent(self, event, ...)
     return
   end
 
-  if event == "COMBAT_LOG_EVENT_UNFILTERED" then onCombatLog(); return end
+  if event == "COMBAT_LOG_EVENT_UNFILTERED" then return end -- Encounters.lua owns defeat attribution
 
   if event == "CHAT_MSG_LOOT" then
     local message = ...
@@ -946,3 +906,9 @@ SL.LogEvent = logEvent
 SL.ItemSnapshot = itemSnapshot
 SL.PlayerSnapshot = playerSnapshot
 SL.UnitSnapshot = unitSnapshot
+
+SL.BagSnapshot = bagSnapshot
+SL.DiffBags = diffBags
+SL.SkillsSnapshot = professionSnapshot
+SL.TrainerSnapshot = trainerServicesSnapshot
+SL.Coords = getCoords

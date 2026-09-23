@@ -61,7 +61,18 @@ local function summarizeEvent(event)
   local loc = shortCoords(event.coords)
   local suffix = ""
 
-  if eventType == "mob_defeat" and event.mob then
+  if eventType == "encounter_updated" then
+    local e=event.encounter or {}
+    suffix=" "..safeText(e.name or e.npcId).." "..safeText(event.reason).." / "..safeText(e.lootState)
+  elseif eventType == "item_received" then
+    suffix=" "..safeText(event.item and event.item.name).." x"..safeText(event.item and event.item.quantity)
+  elseif eventType == "transaction_result" then
+    suffix=" "..safeText(event.kind).." "..safeText(event.status).." money "..safeText(event.moneyDeltaCopper).."c"
+  elseif eventType == "gathering_attempt" then
+    suffix=" "..safeText(event.kind).." "..safeText(event.targetName)
+  elseif eventType == "service_discovered" then
+    suffix=" "..safeText(event.service).." "..safeText(event.npc and event.npc.name)
+  elseif eventType == "mob_defeat" and event.mob then
     suffix = " " .. safeText(event.mob.name) .. " lvl " .. safeText(event.mob.level)
   elseif eventType == "xp_gained" then
     suffix = " +" .. safeText(event.xpGained) .. " XP"

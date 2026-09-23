@@ -1,35 +1,6 @@
--- Extra raw evidence; loot-window observations are NOT receipts or drop rates.
 local SL = StitchLogger
 local frame = CreateFrame("Frame")
-local function npcID(guid)
-  return tonumber((guid or ""):match("^Creature%-%d+%-%d+%-%d+%-%d+%-(%d+)%-"))
-end
-
-local lootSeen, skinningUntil = {}, 0
-local function captureLoot()
-  for slot = 1, GetNumLootItems() do
-    local link = GetLootSlotLink(slot)
-    if link then
-      local _, name, quantity = GetLootSlotInfo(slot)
-      local raw = GetLootSourceInfo and { GetLootSourceInfo(slot) } or {}
-      local sources = {}
-      for i = 1, #raw, 2 do
-        sources[#sources + 1] = { guid = raw[i], npcId = npcID(raw[i]), quantity = raw[i + 1] }
-      end
-      local key = tostring(slot) .. ":" .. link
-      if not lootSeen[key] then
-        lootSeen[key] = true
-        SL.LogEvent("loot_window_item", {
-          item = SL.ItemSnapshot(link, quantity), lootSources = sources,
-          lootKind = time() <= skinningUntil and "skinning_candidate" or "unclassified",
-          confidence = #sources > 0 and "high" or "low",
-          notes = "Observed in loot window; source GUID is evidence. Not proof of receipt. Reopening can repeat observations. Skinning classification is temporal context only.",
-        })
-      end
-    end
-  end
-end
-
+local lastSnapshots = {}
 local function captureRecipes(craft)
   local count = craft and GetNumCrafts or GetNumTradeSkills
   if not count then return end
@@ -54,6 +25,7 @@ local function captureRecipes(craft)
         craftableCount = available, trainingPointCost = trainingPoints, requiredLevel = requiredLevel,
         outputLink = linkFn and linkFn(i), reagents = {} }
       if not craft and GetTradeSkillRecipeLink then recipe.recipeLink = GetTradeSkillRecipeLink(i) end
+      if craft and GetCraftRecipeLink then recipe.recipeLink = GetCraftRecipeLink(i) end
       if not craft and GetTradeSkillNumMade then recipe.minMade, recipe.maxMade = GetTradeSkillNumMade(i) end
       for j = 1, (reagentCountFn and reagentCountFn(i) or 0) do
         local reagentName, _, required, owned = reagentFn(i, j)
@@ -63,10 +35,16 @@ local function captureRecipes(craft)
       recipes[#recipes + 1] = recipe
     end
   end
+  if SL.RememberRecipes then SL.RememberRecipes(recipes, profession) end
+  local fingerprint = SL.Fingerprint({profession, rank, maxRank, recipes})
+  local key = craft and "craft" or "trade"
+  if lastSnapshots[key] == fingerprint then return end
+  lastSnapshots[key] = fingerprint
   SL.LogEvent("recipes_snapshot", { profession = profession, skillRank = rank, maxRank = maxRank,
     recipes = recipes, scope = "currently_visible_entries; expand categories and clear filters to capture more" })
 end
 
+SL.OnReset(function() lastSnapshots = {} end)
 local pending = {}
 local function scheduleRecipes(craft)
   local key = craft and "craft" or "trade"
@@ -78,17 +56,10 @@ local function scheduleRecipes(craft)
   end)
 end
 
-for _, event in ipairs({"LOOT_OPENED", "LOOT_CLOSED", "UNIT_SPELLCAST_SUCCEEDED",
-  "TRADE_SKILL_SHOW", "TRADE_SKILL_UPDATE", "CRAFT_SHOW", "CRAFT_UPDATE"}) do frame:RegisterEvent(event) end
-frame:SetScript("OnEvent", function(_, event, ...)
-  if event == "LOOT_CLOSED" then lootSeen = {}; skinningUntil = 0; return end
+for _, event in ipairs({"TRADE_SKILL_SHOW", "TRADE_SKILL_UPDATE", "CRAFT_SHOW", "CRAFT_UPDATE"}) do frame:RegisterEvent(event) end
+frame:SetScript("OnEvent", function(_, event)
   if StitchLoggerDB and StitchLoggerDB.paused then return end
-  if event == "LOOT_OPENED" then captureLoot()
-  elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
-    local unit, _, spellID = ...
-    if unit == "player" and spellID == 8613 then skinningUntil = time() + 5 end
-  elseif event == "TRADE_SKILL_SHOW" or event == "TRADE_SKILL_UPDATE" then scheduleRecipes(false)
-  elseif event == "CRAFT_SHOW" or event == "CRAFT_UPDATE" then scheduleRecipes(true) end
+  scheduleRecipes(event == "CRAFT_SHOW" or event == "CRAFT_UPDATE")
 end)
 
 -- Search raw evidence in-game without modifying it. Most recent 15 matches.
@@ -109,9 +80,9 @@ SlashCmdList.STITCHFIND = function(query)
     for j = #events, 1, -1 do
       local e = events[j]
       if contains(e) then
-        local subject = e.mob or e.item or e.target or e.vendor or e.trainer or {}
+        local subject = e.encounter or e.mob or e.item or e.target or e.vendor or e.trainer or {}
         DEFAULT_CHAT_FRAME:AddMessage((e.timestamp or "") .. " " .. (e.eventType or "") .. " " ..
-          (subject.name or e.profession or e.text or e.rawMessage or "") .. " [" .. (e.eventId or "") .. "] " .. (e.zone or ""))
+          (subject.name or e.profession or e.text or e.rawMessage or e.kind or "") .. " " .. (e.status or e.reason or "") .. " [" .. (e.eventId or "") .. "] " .. (e.zone or ""))
         count = count + 1
         if count == 15 then return end
       end
